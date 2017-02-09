@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Fahrplan</string>
+    <string name="von">Von:</string>
+    <string name="from">from</string>
+    <string name="to">to</string>
+    <string name="search">Suchen</string>
 </resources>
