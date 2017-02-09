@@ -1,12 +1,19 @@
 package io.github.imsmobile.fahrplan;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import io.github.imsmobile.fahrplan.task.ConnectionSearchTask;
+import io.github.imsmobile.fahrplan.ui.ProgressDialogUI;
+
 public class SearchResultActivity extends AppCompatActivity {
+
+    private TextView textView;
+    private ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,10 +22,26 @@ public class SearchResultActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String from = intent.getStringExtra(MainActivity.FROM_MESSAGE);
         String to = intent.getStringExtra(MainActivity.TO_MESSAGE);
-        TextView textView = new TextView(this);
-        textView.setTextSize(40);
-        textView.setText("From: " + from + " To:" + to);
+        textView = new TextView(this);
         ViewGroup layout = (ViewGroup) findViewById(R.id.activity_search_result);
         layout.addView(textView);
+        startSearch(from, to);
+    }
+
+    private void startSearch(String from, String to) {
+        new ConnectionSearchTask(this).execute(from, to);
+    }
+
+    public void setResult(String text) {
+        textView.setText(text);
+    }
+
+    public void startProgressDialog() {
+        dialog = new ProgressDialogUI(this);
+        dialog.show();
+    }
+
+    public void stopProcessDialog() {
+        dialog.dismiss();
     }
 }

@@ -1,7 +1,9 @@
 package io.github.imsmobile.fahrplan;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -23,12 +25,12 @@ public class MainActivity extends AppCompatActivity {
         Button buttonOne = (Button) findViewById(R.id.btn_search);
         buttonOne.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                search();
+                startActivity();
             }
         });
     }
 
-    private void search() {
+    private void startActivity() {
         Intent intent = new Intent(this, SearchResultActivity.class);
         EditText fromText = (EditText) findViewById(R.id.input_from);
         String from = fromText.getText().toString();
