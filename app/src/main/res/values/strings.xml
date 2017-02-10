@@ -1,8 +1,13 @@
 <resources>
-    <string name="app_name">Fahrplan</string>
-    <string name="search">Suchen</string>
+    <string name="app_name">Schedule</string>
+    <string name="search">Search</string>
     <string name="label_from">From:</string>
     <string name="input_from">Source</string>
     <string name="input_to">Destination</string>
     <string name="label_to">To:</string>
+    <string name="setting_languange">Languange / Sprache </string>
+    <string-array name="setting_languange_selection">
+        <item>English</item>
+        <item>Deutsch</item>
+    </string-array>
 </resources>
