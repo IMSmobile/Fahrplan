@@ -3,8 +3,6 @@ package io.github.imsmobile.fahrplan.ui;
 import android.app.ProgressDialog;
 import android.support.v4.app.FragmentActivity;
 
-import io.github.imsmobile.fahrplan.SearchResultActivity;
-
 /**
  * Created by sandro on 09.02.2017.
  */
