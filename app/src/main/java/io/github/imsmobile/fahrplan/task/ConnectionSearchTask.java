@@ -13,9 +13,6 @@ import ch.schoeb.opendatatransport.model.Connection;
 import io.github.imsmobile.fahrplan.Constants;
 import io.github.imsmobile.fahrplan.SearchResultActivity;
 
-/**
- * Created by sandro on 09.02.2017.
- */
 public class ConnectionSearchTask extends AsyncTask<String,Void,List<Connection>> {
 
 
@@ -48,14 +45,7 @@ public class ConnectionSearchTask extends AsyncTask<String,Void,List<Connection>
     @Override
     protected void onPostExecute(List<Connection> connections) {
         super.onPostExecute(connections);
-        StringBuilder text = new StringBuilder();
-        for (Connection connection :connections) {
-            text.append("From: " + connection.getFrom().getStation().getName()+ System.lineSeparator());
-            text.append("Departure:" + connection.getFrom().getDeparture() + System.lineSeparator());
-            text.append("To:" + connection.getTo().getStation().getName() + System.lineSeparator());
-            text.append("Arrival:" + connection.getTo().getArrival()+ System.lineSeparator()+ System.lineSeparator());
-        }
         activity.stopProcessDialog();
-        activity.setResult(text.toString());
+        activity.setResult(connections);
     }
 }
