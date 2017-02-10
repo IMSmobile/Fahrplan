@@ -5,16 +5,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ListView;
 import android.support.v7.widget.Toolbar;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.List;
+
+import ch.schoeb.opendatatransport.model.Connection;
+import io.github.imsmobile.fahrplan.adapter.ConnectionAdapter;
 import io.github.imsmobile.fahrplan.task.ConnectionSearchTask;
 import io.github.imsmobile.fahrplan.ui.ProgressDialogUI;
 
 public class SearchResultActivity extends AppCompatActivity {
 
-    private TextView textView;
     private ProgressDialog dialog;
 
     @Override
@@ -28,18 +31,23 @@ public class SearchResultActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String from = intent.getStringExtra(MainActivity.FROM_MESSAGE);
         String to = intent.getStringExtra(MainActivity.TO_MESSAGE);
-        textView = new TextView(this);
-        ViewGroup layout = (ViewGroup) findViewById(R.id.content);
-        layout.addView(textView);
         startSearch(from, to);
     }
 
     private void startSearch(String from, String to) {
+        TextView fromView = (TextView) this.findViewById(R.id.result_from);
+        fromView.setText(from);
+        TextView toView = (TextView) this.findViewById(R.id.result_to);
+        toView.setText(to);
+
         new ConnectionSearchTask(this).execute(from, to);
     }
 
-    public void setResult(String text) {
-        textView.setText(text);
+    public void setResult(List<Connection> connections) {
+        ListView listView = (ListView)findViewById(R.id.result_list);
+
+        ConnectionAdapter adapter = new ConnectionAdapter(this, connections);
+        listView.setAdapter(adapter);
     }
 
     public void startProgressDialog() {

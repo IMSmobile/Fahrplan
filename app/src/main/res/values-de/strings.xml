@@ -9,4 +9,5 @@
     <string name="waiting_text">Laden. Bitte warten...</string>
     <string name="settings_title">Einstellungen</string>
     <string name="search_result_title">Verbindungen</string>
+    <string name="day_short">t</string>
 </resources>
