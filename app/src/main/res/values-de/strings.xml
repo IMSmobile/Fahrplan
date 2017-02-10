@@ -7,4 +7,6 @@
     <string name="label_to">Nach:</string>
     <string name="input_to">Ziel</string>
     <string name="waiting_text">Laden. Bitte warten...</string>
+    <string name="settings_title">Einstellungen</string>
+    <string name="search_result_title">Verbindungen</string>
 </resources>

@@ -6,4 +6,6 @@
     <string name="input_to">Destination</string>
     <string name="label_to">To:</string>
     <string name="waiting_text">Loading. Please wait...</string>
+    <string name="settings_title">Settings</string>
+    <string name="search_result_title">Connections</string>
 </resources>
