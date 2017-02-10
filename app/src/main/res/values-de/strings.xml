@@ -6,4 +6,5 @@
     <string name="input_from">Ursprung</string>
     <string name="label_to">Nach:</string>
     <string name="input_to">Ziel</string>
+    <string name="waiting_text">Laden. Bitte warten...</string>
 </resources>

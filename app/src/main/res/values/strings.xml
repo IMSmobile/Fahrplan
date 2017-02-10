@@ -6,6 +6,7 @@
     <string name="input_to">Destination</string>
     <string name="label_to">To:</string>
     <string name="setting_languange">Languange / Sprache </string>
+    <string name="waiting_text">Loading. Please wait...</string>
     <string-array name="setting_languange_selection">
         <item>English</item>
         <item>Deutsch</item>
