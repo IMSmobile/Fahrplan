@@ -3,29 +3,24 @@ package io.github.imsmobile.fahrplan;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import io.github.imsmobile.fahrplan.task.ConnectionSearchTask;
 import io.github.imsmobile.fahrplan.ui.ProgressDialogUI;
 
-public class SearchResultActivity extends AppCompatActivity {
+public class SearchResultActivity extends BaseActivity {
 
     private TextView textView;
     private ProgressDialog dialog;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search_result);
-        Toolbar myChildToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(myChildToolbar);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState, R.layout.activity_search_result);
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
-
 
         Intent intent = getIntent();
         String from = intent.getStringExtra(MainActivity.FROM_MESSAGE);

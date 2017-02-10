@@ -2,24 +2,22 @@ package io.github.imsmobile.fahrplan;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity{
     public final static String FROM_MESSAGE = "io.github.imsmoble.fahrplan.from";
     public final static String TO_MESSAGE = "io.github.imsmoble.fahrplan.to";
 
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState, R.layout.activity_main);
         registerSearchButton();
     }
+
+
 
     private void registerSearchButton() {
         Button buttonOne = (Button) findViewById(R.id.btn_search);
