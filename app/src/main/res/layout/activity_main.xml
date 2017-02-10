@@ -11,10 +11,9 @@
     tools:context="io.github.imsmobile.fahrplan.MainActivity">
 
     <TextView
-        android:text="@string/from"
+        android:text="@string/label_from"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="13dp"
         android:id="@+id/label_from"
         android:labelFor="@+id/input_from"
         android:layout_alignParentTop="true"
@@ -25,15 +24,13 @@
         android:layout_height="wrap_content"
         android:inputType="text"
         android:text=""
-        android:hint="@string/from"
-        android:ems="10"
-        android:layout_marginTop="13dp"
+        android:hint="@string/input_from"
         android:id="@+id/input_from"
         android:layout_below="@+id/label_from"
         android:layout_alignStart="@+id/label_from" />
 
     <TextView
-        android:text="@string/to"
+        android:text="@string/label_to"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/input_from"
@@ -46,11 +43,9 @@
         android:layout_height="wrap_content"
         android:inputType="text"
         android:text=""
-        android:hint="@string/to"
-        android:ems="10"
+        android:hint="@string/input_to"
         android:layout_below="@+id/lable_to"
         android:layout_alignStart="@+id/lable_to"
-        android:layout_marginTop="15dp"
         android:id="@+id/input_to" />
 
     <Button
@@ -59,6 +54,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/input_to"
         android:layout_alignStart="@+id/input_to"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="5dp"
         android:id="@+id/btn_search" />
 </RelativeLayout>
