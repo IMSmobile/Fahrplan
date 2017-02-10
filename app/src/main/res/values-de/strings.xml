@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Fahrplan</string>
+    <string name="search">Suchen</string>
+    <string name="label_from">Von:</string>
+    <string name="input_from">Ursprung</string>
+    <string name="label_to">Nach:</string>
+    <string name="input_to">Ziel</string>
+    <string name="waiting_text">Laden. Bitte warten...</string>
+    <string name="settings_title">Einstellungen</string>
+    <string name="search_result_title">Verbindungen</string>
+</resources>
