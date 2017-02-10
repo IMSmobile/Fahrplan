@@ -1,8 +1,8 @@
 package io.github.imsmobile.fahrplan;
 
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,8 +29,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
-        TextView departureTime = (TextView) findViewById(R.id.label_departure);
-        departureTime.setText(getResources().getString(R.string.label_departure)+ " " + new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(new Date()));
+        setDepartureTime(new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(new Date()));
         registerSearchButton();
     }
 
@@ -78,7 +78,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showTimePickerDialog(View view) {
-        DialogFragment newFragment = new TimePickerFragment();
-        newFragment.show(getSupportFragmentManager(), "timePicker");
+        TimePickerFragment fragment = new TimePickerFragment();
+        fragment.setOnTimeSetListener(new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                setDepartureTime(String.format(Locale.ENGLISH, "%02d", hourOfDay) + ":" + String.format(Locale.ENGLISH, "%02d", minute));
+            }
+        });
+        fragment.show(getSupportFragmentManager(), "timePicker");
+    }
+
+    private void setDepartureTime(String departureTime) {
+        TextView editText = (TextView) findViewById(R.id.label_departure);
+        editText.setText(getResources().getString(R.string.label_departure) + " " + departureTime);
     }
 }
