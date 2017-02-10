@@ -3,6 +3,7 @@ package io.github.imsmobile.fahrplan;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -21,8 +22,9 @@ import java.util.Locale;
 import io.github.imsmobile.fahrplan.fragment.TimePickerFragment;
 
 public class MainActivity extends AppCompatActivity {
-    public final static String FROM_MESSAGE = "io.github.imsmoble.fahrplan.from";
-    public final static String TO_MESSAGE = "io.github.imsmoble.fahrplan.to";
+    public static final String FROM_MESSAGE = "io.github.imsmoble.fahrplan.from";
+    public static final String TO_MESSAGE = "io.github.imsmoble.fahrplan.to";
+    public static final String DEPARTURE_MESSAGE = "io.github.imsmoble.fahrplan.departure";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,10 +51,18 @@ public class MainActivity extends AppCompatActivity {
 
         EditText toText = (EditText) findViewById(R.id.input_to);
         String to = toText.getText().toString();
+
+
+        TextView departureTimeText = (TextView) findViewById(R.id.label_departure);
+        String departureTime = departureTimeText.getText().toString().substring(getDepartureTimePrefix().length());
+
+
         intent.putExtra(FROM_MESSAGE, from);
         intent.putExtra(TO_MESSAGE, to);
+        intent.putExtra(DEPARTURE_MESSAGE, departureTime);
         startActivity(intent);
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -90,6 +100,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void setDepartureTime(String departureTime) {
         TextView editText = (TextView) findViewById(R.id.label_departure);
-        editText.setText(getResources().getString(R.string.label_departure) + " " + departureTime);
+        editText.setText(getDepartureTimePrefix()+ departureTime);
     }
+
+    @NonNull
+    private String getDepartureTimePrefix() {
+        return getResources().getString(R.string.label_departure) + " ";
+    }
+
 }
