@@ -35,6 +35,7 @@
         android:layout_height="wrap_content"
         android:inputType="text"
         android:text=""
+        android:textSize="18sp"
         android:hint="@string/input_from"
         android:id="@+id/input_from"
         android:layout_below="@+id/label_from"
@@ -54,19 +55,36 @@
         android:layout_height="wrap_content"
         android:inputType="text"
         android:text=""
+        android:textSize="18sp"
         android:hint="@string/input_to"
         android:layout_below="@+id/lable_to"
         android:layout_alignStart="@+id/lable_to"
         android:id="@+id/input_to" />
 
+    <TextView
+            android:text="@string/label_departure"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/input_to"
+            android:layout_alignStart="@+id/input_from"
+            android:labelFor="@+id/input_to"
+            android:inputType="none"
+            android:textSize="18sp"
+            android:drawableStart="@drawable/ic_tune_black_24px"
+            android:drawablePadding="2sp"
+            android:id="@+id/label_departure" />
+
     <Button
         android:text="@string/search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/input_to"
+        android:layout_below="@+id/label_departure"
         android:layout_alignStart="@+id/input_to"
         android:layout_marginTop="5dp"
         android:id="@+id/btn_search" />
+
+
+
     </RelativeLayout>
 
 </RelativeLayout>

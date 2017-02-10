@@ -2,6 +2,7 @@ package io.github.imsmobile.fahrplan;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -10,6 +11,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+import io.github.imsmobile.fahrplan.fragment.TimePickerFragment;
 
 public class MainActivity extends AppCompatActivity {
     public final static String FROM_MESSAGE = "io.github.imsmoble.fahrplan.from";
@@ -20,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        TextView departureTime = (TextView) findViewById(R.id.label_departure);
+        departureTime.setText(getResources().getString(R.string.label_departure)+ " " + new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(new Date()));
         registerSearchButton();
     }
 
@@ -65,5 +75,10 @@ public class MainActivity extends AppCompatActivity {
     private void startSettingActivity() {
         Intent intent = new Intent(this, SettingActivity.class);
         startActivity(intent);
+    }
+
+    public void showTimePickerDialog(View view) {
+        DialogFragment newFragment = new TimePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "timePicker");
     }
 }
