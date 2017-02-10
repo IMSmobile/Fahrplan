@@ -19,7 +19,7 @@ import io.github.imsmobile.fahrplan.SearchResultActivity;
 public class ConnectionSearchTask extends AsyncTask<String,Void,List<Connection>> {
 
 
-    private SearchResultActivity activity;
+    private final SearchResultActivity activity;
 
 
     public ConnectionSearchTask(SearchResultActivity activity) {
