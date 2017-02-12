@@ -22,6 +22,7 @@ public class ConnectionAdapter extends BaseAdapter {
 
     private Context context;
     private List<Connection> connections;
+    private static final DateFormat DF = DateFormat.getTimeInstance(DateFormat.SHORT);
 
     public ConnectionAdapter(Context context, List<Connection> connections) {
         this.context = context;
@@ -51,31 +52,24 @@ public class ConnectionAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.search_item, parent, false);
         }
 
-        DateFormat df = DateFormat.getTimeInstance(DateFormat.SHORT);
         Connection connection = (Connection) getItem(position);
-        Number departure_ts = connection.getFrom().getDepartureTimestamp();
-        Number arrival_ts = Long.parseLong(connection.getTo().getArrivalTimestamp());
-        Date departure = new Date(departure_ts.longValue()*1000);
-        Date arrival = new Date(arrival_ts.longValue()*1000);
 
-        String duration = prettifyDuration(connection.getDuration());
-
-        TextView fromTextView = (TextView) convertView.findViewById(R.id.item_from);
-        fromTextView.setText(connection.getFrom().getStation().getName());
-
-        TextView toTextView = (TextView) convertView.findViewById(R.id.item_to);
-        toTextView.setText(connection.getTo().getStation().getName());
-
-        TextView departureTextView = (TextView) convertView.findViewById(R.id.departure_time);
-        departureTextView.setText(df.format(departure));
-
-        TextView durationTextView = (TextView) convertView.findViewById(R.id.duration);
-        durationTextView.setText(duration);
-
-        TextView arrivalTextView = (TextView) convertView.findViewById(R.id.arrival_time);
-        arrivalTextView.setText(df.format(arrival));
+        fillConnectionItem(convertView, connection);
 
         return convertView;
+    }
+
+    private void fillConnectionItem(View view, Connection connection) {
+        setViewText(view, R.id.item_from, connection.getFrom().getStation().getName());
+        setViewText(view, R.id.item_to, connection.getTo().getStation().getName());
+        setViewText(view, R.id.departure_time, formatTimestamp(connection.getFrom().getDepartureTimestamp()));
+        setViewText(view, R.id.duration, prettifyDuration(connection.getDuration()));
+        setViewText(view, R.id.arrival_time, formatTimestamp(Long.parseLong(connection.getTo().getArrivalTimestamp())));
+    }
+
+    private void setViewText(View convertView, int id, String str) {
+        TextView fromTextView = (TextView) convertView.findViewById(id);
+        fromTextView.setText(str);
     }
 
     private String prettifyDuration(String duration) {
@@ -98,5 +92,8 @@ public class ConnectionAdapter extends BaseAdapter {
         }
     }
 
+    private String formatTimestamp(Number timestamp) {
+        return DF.format(new Date(timestamp.longValue()*1000));
+    }
 
 }
