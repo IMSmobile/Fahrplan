@@ -30,7 +30,7 @@
         android:layout_alignParentStart="true"
         />
 
-    <EditText
+    <AutoCompleteTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="text"
@@ -50,7 +50,7 @@
         android:labelFor="@+id/input_to"
         android:id="@+id/lable_to" />
 
-    <EditText
+    <AutoCompleteTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="text"

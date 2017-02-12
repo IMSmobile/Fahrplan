@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -20,6 +21,8 @@ import java.util.Date;
 import java.util.Locale;
 
 import io.github.imsmobile.fahrplan.fragment.TimePickerFragment;
+
+import io.github.imsmobile.fahrplan.adapter.StationAdapter;
 
 public class MainActivity extends AppCompatActivity {
     public static final String FROM_MESSAGE = "io.github.imsmoble.fahrplan.from";
@@ -33,6 +36,13 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         setDepartureTime(new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(new Date()));
         registerSearchButton();
+
+        AutoCompleteTextView inputFrom = (AutoCompleteTextView) findViewById(R.id.input_from);
+        inputFrom.setAdapter(new StationAdapter(this, R.layout.autocomplete_item));
+
+        AutoCompleteTextView inputTo= (AutoCompleteTextView) findViewById(R.id.input_to);
+        inputTo.setAdapter(new StationAdapter(this, R.layout.autocomplete_item));
+
     }
 
     private void registerSearchButton() {
