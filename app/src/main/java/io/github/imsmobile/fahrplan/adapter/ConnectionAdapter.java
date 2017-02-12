@@ -1,6 +1,7 @@
 package io.github.imsmobile.fahrplan.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import java.util.Date;
 import java.util.List;
 
 import ch.schoeb.opendatatransport.model.Connection;
+import ch.schoeb.opendatatransport.model.Journey;
+import ch.schoeb.opendatatransport.model.Section;
 import io.github.imsmobile.fahrplan.R;
 
 public class ConnectionAdapter extends BaseAdapter {
@@ -23,6 +26,9 @@ public class ConnectionAdapter extends BaseAdapter {
     private Context context;
     private List<Connection> connections;
     private static final DateFormat DF = DateFormat.getTimeInstance(DateFormat.SHORT);
+    private static final String TRAM_ICON = "\uD83D\uDE8B";
+    private static final String BUS_ICON = "\uD83D\uDE8C";
+    private static final String ARROW = "\u279C";
 
     public ConnectionAdapter(Context context, List<Connection> connections) {
         this.context = context;
@@ -65,6 +71,37 @@ public class ConnectionAdapter extends BaseAdapter {
         setViewText(view, R.id.departure_time, formatTimestamp(connection.getFrom().getDepartureTimestamp()));
         setViewText(view, R.id.duration, prettifyDuration(connection.getDuration()));
         setViewText(view, R.id.arrival_time, formatTimestamp(Long.parseLong(connection.getTo().getArrivalTimestamp())));
+        setViewText(view, R.id.journey_stops, buildVehicles(connection));
+    }
+
+    @NonNull
+    private String buildVehicles(Connection connection) {
+        StringBuilder vehicles = new StringBuilder();
+        for (Section section: connection.getSections()) {
+            Journey journey = section.getJourney();
+            if(journey != null) {
+                String category =  journey.getCategory();
+                switch(category) {
+                    case "S":
+                        vehicles.append(category);
+                        vehicles.append(journey.getNumber());
+                        break;
+                    case "T":
+                        vehicles.append(TRAM_ICON);
+                        vehicles.append(journey.getNumber());
+                        break;
+                    case "BUS":
+                        vehicles.append(BUS_ICON);
+                        vehicles.append(journey.getNumber());
+                        break;
+                    default:
+                        vehicles.append(category);
+                }
+                vehicles.append(ARROW);
+            }
+        }
+        vehicles.deleteCharAt(vehicles.length()-1);
+        return vehicles.toString();
     }
 
     private void setViewText(View convertView, int id, String str) {
