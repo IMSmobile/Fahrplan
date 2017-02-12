@@ -27,9 +27,10 @@ public class ConnectionSearchTask extends AsyncTask<String,Void,List<Connection>
     protected List<Connection> doInBackground(String... params) {
         String from = params[0];
         String to = params[1];
+        String departure = params[2];
         IOpenTransportRepository repo = OpenTransportRepositoryFactory.CreateOnlineOpenTransportRepository();
         try {
-            return repo.searchConnections(from, to).getConnections();
+            return repo.searchConnections(from, to, null, null, departure, false).getConnections();
         } catch (OpenDataTransportException e) {
             Log.e(Constants.LOG, e.getMessage(), e);
             return Collections.emptyList();

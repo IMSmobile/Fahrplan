@@ -31,16 +31,17 @@ public class SearchResultActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String from = intent.getStringExtra(MainActivity.FROM_MESSAGE);
         String to = intent.getStringExtra(MainActivity.TO_MESSAGE);
-        startSearch(from, to);
+        String departure = intent.getStringExtra(MainActivity.DEPARTURE_MESSAGE);
+        startSearch(from, to, departure);
     }
 
-    private void startSearch(String from, String to) {
+    private void startSearch(String from, String to, String departure) {
         TextView fromView = (TextView) this.findViewById(R.id.result_from);
         fromView.setText(from);
         TextView toView = (TextView) this.findViewById(R.id.result_to);
         toView.setText(to);
 
-        new ConnectionSearchTask(this).execute(from, to);
+        new ConnectionSearchTask(this).execute(from, to, departure);
     }
 
     public void setResult(List<Connection> connections) {
