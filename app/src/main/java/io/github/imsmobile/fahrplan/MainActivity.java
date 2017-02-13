@@ -87,6 +87,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_settings:
                 startSettingActivity();
                 return true;
+            case R.id.action_about:
+                startAboutActivity();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -97,6 +100,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    private void startAboutActivity() {
+        Intent intentAbout = new Intent(this, AboutActivity.class);
+        startActivity(intentAbout);
+    }
     public void showTimePickerDialog(View view) {
         TimePickerFragment fragment = new TimePickerFragment();
         fragment.setOnTimeSetListener(new TimePickerDialog.OnTimeSetListener() {
