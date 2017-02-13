@@ -5,9 +5,10 @@
     <string name="input_from">Source</string>
     <string name="input_to">Destination</string>
     <string name="label_to">To:</string>
-    <string name="waiting_text">Loading. Please wait...</string>
+    <string name="waiting_text">Loading. Please wait... </string>
     <string name="settings_title">Settings</string>
     <string name="search_result_title">Connections</string>
     <string name="day_short">d</string>
     <string name="label_departure">Departure Time:</string>
+    <string name="oppositeDirection">Opposite Direction</string>
 </resources>
