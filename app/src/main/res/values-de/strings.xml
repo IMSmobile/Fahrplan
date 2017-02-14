@@ -12,4 +12,6 @@
     <string name="day_short">t</string>
     <string name="label_departure">Abfahrtszeit:</string>
     <string name="oppositeDirection">Gegenrichtung</string>
+    <string name="label_about">Über</string>
+    <string name="label_developers">Entwickler:</string>
 </resources>
