@@ -11,4 +11,6 @@
     <string name="search_result_title">Verbindungen</string>
     <string name="day_short">t</string>
     <string name="label_departure">Abfahrtszeit:</string>
+    <string name="label_about">Über</string>
+    <string name="label_developers">Entwickler:</string>
 </resources>
