@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         setDepartureTime(new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(new Date()));
         registerSearchButton();
+        registerOppositeButton();
 
         AutoCompleteTextView inputFrom = (AutoCompleteTextView) findViewById(R.id.input_from);
         inputFrom.setAdapter(new StationAdapter(this, R.layout.autocomplete_item));
@@ -52,6 +53,26 @@ public class MainActivity extends AppCompatActivity {
                 startActivity();
             }
         });
+    }
+
+    private void registerOppositeButton() {
+        Button buttonOne = (Button) findViewById(R.id.oppositeButton);
+        buttonOne.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startChangeDirection();
+            }
+        });
+    }
+
+    private void startChangeDirection() {
+        EditText fromText = (EditText) findViewById(R.id.input_from);
+        String bufferFrom = fromText.getText().toString();
+
+        EditText toText = (EditText) findViewById(R.id.input_to);
+        String bufferTo = toText.getText().toString();
+
+        fromText.setText(bufferTo);
+        toText.setText(bufferFrom);
     }
 
     private void startActivity() {
