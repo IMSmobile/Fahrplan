@@ -30,6 +30,7 @@ public class ConnectionAdapter extends BaseAdapter {
     private static final String TRAM_ICON = "\uD83D\uDE8B";
     private static final String BUS_ICON = "\uD83D\uDE8C";
     private static final String ARROW = "\u279C";
+    private static final char OCCUPANCY = '\u2581';
 
     public ConnectionAdapter(Context context, List<Connection> connections) {
         this.context = context;
@@ -71,8 +72,22 @@ public class ConnectionAdapter extends BaseAdapter {
         setViewText(view, R.id.item_to, connection.getTo().getStation().getName());
         setViewText(view, R.id.departure_time, formatTimestamp(connection.getFrom().getDepartureTimestamp()));
         setViewText(view, R.id.duration, prettifyDuration(connection.getDuration()));
+        setViewText(view, R.id.occupancy, buildOccupancy(connection));
         setViewText(view, R.id.arrival_time, formatTimestamp(Long.parseLong(connection.getTo().getArrivalTimestamp())));
         setViewText(view, R.id.journey_stops, buildVehicles(connection));
+    }
+
+    private String buildOccupancy(Connection connection) {
+        StringBuilder occupancy = new StringBuilder();
+        if(connection.getCapacity1st() != null) {
+            occupancy.append(" 1.");
+            occupancy.append((char) (OCCUPANCY + connection.getCapacity1st().intValue()*2));
+        }
+        if(connection.getCapacity2nd() != null) {
+            occupancy.append(" 2.");
+            occupancy.append((char) (OCCUPANCY + connection.getCapacity2nd().intValue()*2));
+        }
+        return occupancy.toString();
     }
 
     @NonNull
@@ -108,11 +123,6 @@ public class ConnectionAdapter extends BaseAdapter {
         return vehicles.toString();
     }
 
-    private void setViewText(View convertView, int id, String str) {
-        TextView fromTextView = (TextView) convertView.findViewById(id);
-        fromTextView.setText(str);
-    }
-
     private String prettifyDuration(String duration) {
         PeriodFormatter formatter = new PeriodFormatterBuilder()
                 .appendDays().appendSuffix("d")
@@ -135,6 +145,11 @@ public class ConnectionAdapter extends BaseAdapter {
 
     private String formatTimestamp(Number timestamp) {
         return DF.format(new Date(timestamp.longValue()*1000));
+    }
+
+    private void setViewText(View convertView, int id, String str) {
+        TextView fromTextView = (TextView) convertView.findViewById(id);
+        fromTextView.setText(str);
     }
 
 }
