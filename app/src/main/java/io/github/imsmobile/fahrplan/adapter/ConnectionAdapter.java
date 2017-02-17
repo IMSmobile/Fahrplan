@@ -15,6 +15,7 @@ import org.joda.time.format.PeriodFormatterBuilder;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import ch.schoeb.opendatatransport.model.Connection;
 import ch.schoeb.opendatatransport.model.Journey;
@@ -23,8 +24,8 @@ import io.github.imsmobile.fahrplan.R;
 
 public class ConnectionAdapter extends BaseAdapter {
 
-    private Context context;
-    private List<Connection> connections;
+    private final Context context;
+    private final List<Connection> connections;
     private static final DateFormat DF = DateFormat.getTimeInstance(DateFormat.SHORT);
     private static final String TRAM_ICON = "\uD83D\uDE8B";
     private static final String BUS_ICON = "\uD83D\uDE8C";
@@ -91,6 +92,7 @@ public class ConnectionAdapter extends BaseAdapter {
                         vehicles.append(journey.getNumber());
                         break;
                     case "BUS":
+                    case "NFB":
                         vehicles.append(BUS_ICON);
                         vehicles.append(journey.getNumber());
                         break;
@@ -100,7 +102,9 @@ public class ConnectionAdapter extends BaseAdapter {
                 vehicles.append(ARROW);
             }
         }
-        vehicles.deleteCharAt(vehicles.length()-1);
+        if(vehicles.length() > 0) {
+            vehicles.deleteCharAt(vehicles.length() - 1);
+        }
         return vehicles.toString();
     }
 
@@ -118,14 +122,14 @@ public class ConnectionAdapter extends BaseAdapter {
 
         Period p = formatter.parsePeriod(duration);
 
-        String dayshort = context.getResources().getString(R.string.day_short);
+        String day = context.getResources().getString(R.string.day_short);
 
         if(p.getDays() > 0) {
-            return String.format("%d"+ dayshort + " %dh %dm", p.getDays(), p.getHours(), p.getMinutes());
+            return String.format("%d"+ day + " %dh %dm", p.getDays(), p.getHours(), p.getMinutes());
         } else if (p.getHours() > 0) {
-            return String.format("%dh %dm", p.getHours(), p.getMinutes());
+            return String.format(Locale.getDefault(), "%dh %dm", p.getHours(), p.getMinutes());
         } else {
-            return String.format("%dm", p.getMinutes());
+            return String.format(Locale.getDefault(), "%dm", p.getMinutes());
         }
     }
 
