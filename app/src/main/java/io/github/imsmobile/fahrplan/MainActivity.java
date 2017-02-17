@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         Button buttonOne = (Button) findViewById(R.id.btn_search);
         buttonOne.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity();
+                trySearch();
             }
         });
     }
@@ -75,19 +76,25 @@ public class MainActivity extends AppCompatActivity {
         toText.setText(bufferFrom);
     }
 
-    private void startActivity() {
-        Intent intent = new Intent(this, SearchResultActivity.class);
+    private void trySearch() {
         EditText fromText = (EditText) findViewById(R.id.input_from);
         String from = fromText.getText().toString();
 
         EditText toText = (EditText) findViewById(R.id.input_to);
         String to = toText.getText().toString();
 
-
         TextView departureTimeText = (TextView) findViewById(R.id.label_departure);
         String departureTime = departureTimeText.getText().toString().substring(getDepartureTimePrefix().length());
 
+        if(to.length() > 0 && from.length() > 0) {
+            startSearchActivity(to, from, departureTime);
+        } else {
+            Toast.makeText(this, this.getResources().getText(R.string.error_search_incomplete), Toast.LENGTH_LONG).show();
+        }
 
+    }
+    private void startSearchActivity(String to, String from, String departureTime) {
+        Intent intent = new Intent(this, SearchResultActivity.class);
         intent.putExtra(FROM_MESSAGE, from);
         intent.putExtra(TO_MESSAGE, to);
         intent.putExtra(DEPARTURE_MESSAGE, departureTime);
