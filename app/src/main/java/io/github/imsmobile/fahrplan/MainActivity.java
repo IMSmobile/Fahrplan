@@ -21,9 +21,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import io.github.imsmobile.fahrplan.fragment.TimePickerFragment;
-
 import io.github.imsmobile.fahrplan.adapter.StationAdapter;
+import io.github.imsmobile.fahrplan.fragment.TimePickerFragment;
 
 public class MainActivity extends AppCompatActivity {
     public static final String FROM_MESSAGE = "io.github.imsmoble.fahrplan.from";
@@ -86,10 +85,10 @@ public class MainActivity extends AppCompatActivity {
         TextView departureTimeText = (TextView) findViewById(R.id.label_departure);
         String departureTime = departureTimeText.getText().toString().substring(getDepartureTimePrefix().length());
 
-        if(to.length() > 0 && from.length() > 0) {
-            startSearchActivity(to, from, departureTime);
-        } else {
+        if(to.isEmpty() || from.isEmpty()) {
             Toast.makeText(this, this.getResources().getText(R.string.error_search_incomplete), Toast.LENGTH_LONG).show();
+        } else {
+            startSearchActivity(to, from, departureTime);
         }
 
     }
