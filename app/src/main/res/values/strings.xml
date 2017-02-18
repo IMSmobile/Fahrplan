@@ -22,6 +22,10 @@
     <string name="label_take_me_home">Take me home address:</string>
     <string name="input_take_me_home">My address</string>
     <string name="setting_name" translatable="false">io.github.imsmobile.fahrplan.settings</string>
+    <string name="setting_transportation_train" translatable="false">io.github.imsmobile.fahrplan.settings.transportation.train</string>
+    <string name="setting_transportation_tram" translatable="false">io.github.imsmobile.fahrplan.settings.transportation.tram</string>
+    <string name="setting_transportation_bus" translatable="false">io.github.imsmobile.fahrplan.settings.transportation.bus</string>
+    <string name="setting_transportation_boat" translatable="false">io.github.imsmobile.fahrplan.settings.transportation.boat</string>
     <string name="setting_key_take_me_home" translatable="false">setting_take_me_home</string>
     <string name="button_take_me_home">Take me home</string>
     <string name="error_missing_take_me_home">Take me home address not configured.</string>
