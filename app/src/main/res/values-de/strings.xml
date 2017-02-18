@@ -14,4 +14,5 @@
     <string name="oppositeDirection">Gegenrichtung</string>
     <string name="label_about">Über</string>
     <string name="label_developers">Entwickler:</string>
+    <string name="error_search_incomplete">Bitte Von und Nach eingeben.</string>
 </resources>
