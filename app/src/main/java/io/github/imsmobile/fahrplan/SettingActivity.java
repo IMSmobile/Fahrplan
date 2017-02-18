@@ -1,6 +1,5 @@
 package io.github.imsmobile.fahrplan;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -33,14 +32,14 @@ public class SettingActivity extends AppCompatActivity {
     }
 
     private void saveSettings(String home) {
-        SharedPreferences preferences = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences preferences = this.getSharedPreferences(getString(R.string.setting_name), MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(getString(R.string.setting_key_take_me_home), home);
         editor.apply();
     }
 
     private String getSettings() {
-        SharedPreferences preferences = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences preferences = this.getSharedPreferences(getString(R.string.setting_name), MODE_PRIVATE);
         return preferences.getString(getString(R.string.setting_key_take_me_home), "");
     }
 }
