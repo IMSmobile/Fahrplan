@@ -3,21 +3,18 @@ package io.github.imsmobile.fahrplan.task;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import ch.schoeb.opendatatransport.IOpenTransportRepository;
 import ch.schoeb.opendatatransport.OpenDataTransportException;
 import ch.schoeb.opendatatransport.OpenTransportRepositoryFactory;
 import ch.schoeb.opendatatransport.model.Connection;
+import ch.schoeb.opendatatransport.model.ConnectionQuery;
 import io.github.imsmobile.fahrplan.Constants;
 import io.github.imsmobile.fahrplan.SearchResultActivity;
 
-public class ConnectionSearchTask extends AsyncTask<String,Void,List<Connection>> {
+public class ConnectionSearchTask extends AsyncTask<ConnectionQuery,Void,List<Connection>> {
 
 
     private final SearchResultActivity activity;
@@ -28,18 +25,18 @@ public class ConnectionSearchTask extends AsyncTask<String,Void,List<Connection>
     }
 
     @Override
-    protected List<Connection> doInBackground(String... params) {
-        String from = params[0];
-        String to = params[1];
-        boolean isArrival = Boolean.parseBoolean(params[2]);
-        Date dateTime = getDate(params[3]);
-        boolean isTrain = Boolean.parseBoolean(params[4]);
-        boolean isTram = Boolean.parseBoolean(params[5]);
-        boolean isBus = Boolean.parseBoolean(params[6]);
-        boolean isShip = Boolean.parseBoolean(params[7]);
+    protected List<Connection> doInBackground(ConnectionQuery... params) {
+        ConnectionQuery query =  params[0];
+        String from = query.getFrom();
+        String to = query.getTo();
+        boolean isArrival = query.isArrivalTime();
+        boolean isTrain = query.isTrain();
+        boolean isTram = query.isTram();
+        boolean isBus = query.isBus();
+        boolean isShip = query.isShip();
 
-        String date = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(dateTime);
-        String time =new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(dateTime);
+        String date = query.getDate();
+        String time =query.getTime();
         IOpenTransportRepository repo = OpenTransportRepositoryFactory.CreateOnlineOpenTransportRepository();
         try {
             return repo.searchConnections(from, to, null, date, time, isArrival).getConnections();
@@ -49,13 +46,6 @@ public class ConnectionSearchTask extends AsyncTask<String,Void,List<Connection>
         }
     }
 
-    private Date getDate(String date) {
-        try {
-            return SimpleDateFormat.getDateTimeInstance().parse(date);
-        } catch (ParseException e) {
-            throw new IllegalStateException(e);
-        }
-    }
 
 
     @Override
