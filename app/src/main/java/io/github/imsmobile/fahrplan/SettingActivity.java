@@ -28,7 +28,7 @@ public class SettingActivity extends AppCompatActivity {
                 saveSettings(e.toString());
             }
         });
-        inputTakeMeHome.setText(getSettings());
+        inputTakeMeHome.setText(getSettings(), false);
     }
 
     private void saveSettings(String home) {
