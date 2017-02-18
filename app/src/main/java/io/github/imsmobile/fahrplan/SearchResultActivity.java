@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ListView;
 import android.support.v7.widget.Toolbar;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -31,18 +31,19 @@ public class SearchResultActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String from = intent.getStringExtra(MainActivity.FROM_MESSAGE);
         String to = intent.getStringExtra(MainActivity.TO_MESSAGE);
-        String departure = intent.getStringExtra(MainActivity.DEPARTURE_MESSAGE);
-        startSearch(from, to, departure);
+        String arrivalTime = intent.getStringExtra(MainActivity.IS_ARRIVAL_TIME_MESSAGE);
+        String dateTime = intent.getStringExtra(MainActivity.DATETIME_MESSAGE);
+        startSearch(from, to, arrivalTime, dateTime);
     }
 
-    private void startSearch(String from, String to, String departure) {
+    private void startSearch(String from, String to, String arrivalTime, String dateTime) {
         TextView fromView = (TextView) this.findViewById(R.id.result_from);
         fromView.setText(from);
         TextView toView = (TextView) this.findViewById(R.id.result_to);
         toView.setText(to);
-
-        new ConnectionSearchTask(this).execute(from, to, departure);
+        new ConnectionSearchTask(this).execute(from, to, arrivalTime, dateTime);
     }
+
 
     public void setResult(List<Connection> connections) {
         ListView listView = (ListView)findViewById(R.id.result_list);

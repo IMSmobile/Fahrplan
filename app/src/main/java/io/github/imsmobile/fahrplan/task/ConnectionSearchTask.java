@@ -3,8 +3,12 @@ package io.github.imsmobile.fahrplan.task;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import ch.schoeb.opendatatransport.IOpenTransportRepository;
 import ch.schoeb.opendatatransport.OpenDataTransportException;
@@ -27,15 +31,27 @@ public class ConnectionSearchTask extends AsyncTask<String,Void,List<Connection>
     protected List<Connection> doInBackground(String... params) {
         String from = params[0];
         String to = params[1];
-        String departure = params[2];
+        boolean isArrival = Boolean.parseBoolean(params[2]);
+        Date dateTime = getDate(params[3]);
+        String date = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(dateTime);
+        String time =new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(dateTime);
         IOpenTransportRepository repo = OpenTransportRepositoryFactory.CreateOnlineOpenTransportRepository();
         try {
-            return repo.searchConnections(from, to, null, null, departure, false).getConnections();
+            return repo.searchConnections(from, to, null, date, time, isArrival).getConnections();
         } catch (OpenDataTransportException e) {
             Log.e(Constants.LOG, e.getMessage(), e);
             return Collections.emptyList();
         }
     }
+
+    private Date getDate(String date) {
+        try {
+            return SimpleDateFormat.getDateTimeInstance().parse(date);
+        } catch (ParseException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
 
     @Override
     protected void onPreExecute() {

@@ -33,4 +33,8 @@ public class DepartureArrivalModel {
     public void setDeparture(boolean departure) {
         this.departure = departure;
     }
+
+    public boolean isArrival() {
+        return !isDeparture();
+    }
 }

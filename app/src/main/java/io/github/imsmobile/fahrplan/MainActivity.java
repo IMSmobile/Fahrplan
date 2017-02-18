@@ -27,7 +27,8 @@ import io.github.imsmobile.fahrplan.model.DepartureArrivalModel;
 public class MainActivity extends AppCompatActivity {
     public static final String FROM_MESSAGE = "io.github.imsmoble.fahrplan.from";
     public static final String TO_MESSAGE = "io.github.imsmoble.fahrplan.to";
-    public static final String DEPARTURE_MESSAGE = "io.github.imsmoble.fahrplan.departure";
+    public static final String DATETIME_MESSAGE = "io.github.imsmoble.fahrplan.departure";
+    public static final String IS_ARRIVAL_TIME_MESSAGE = "io.github.imsmoble.fahrplan.departureOrArrival";
 
 
     private DepartureArrivalModel model = new DepartureArrivalModel();
@@ -100,7 +101,8 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SearchResultActivity.class);
         intent.putExtra(FROM_MESSAGE, from);
         intent.putExtra(TO_MESSAGE, to);
-        intent.putExtra(DEPARTURE_MESSAGE, departureTime);
+        intent.putExtra(DATETIME_MESSAGE, SimpleDateFormat.getDateTimeInstance().format(model.getSelectedDateTime().toDate()));
+        intent.putExtra(IS_ARRIVAL_TIME_MESSAGE, String.valueOf(model.isArrival()));
         startActivity(intent);
     }
 
