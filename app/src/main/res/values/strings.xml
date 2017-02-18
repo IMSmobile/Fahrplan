@@ -15,4 +15,8 @@
     <string name="label_developers">Developers:</string>
     <string name="developerNameText">Sandro Zbinden \nsandro.zbinden@hsr.ch \n\nMichael Leu \nmichael.leu@hsr.ch \n \nNiklaus Tschirky \nniklaus.tschirky@hsr.ch</string>
     <string name="error_search_incomplete">Please provide from and to.</string>
+    <string name="label_date">Date:</string>
+    <string name="label_arrival">Arrival Time:</string>
+    <string name="radio_departure">Departure</string>
+    <string name="radio_arrival">Arrival</string>
 </resources>
