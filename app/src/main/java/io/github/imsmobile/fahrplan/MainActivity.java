@@ -65,14 +65,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startChangeDirection() {
-        EditText fromText = (EditText) findViewById(R.id.input_from);
+        AutoCompleteTextView fromText = (AutoCompleteTextView) findViewById(R.id.input_from);
         String bufferFrom = fromText.getText().toString();
 
-        EditText toText = (EditText) findViewById(R.id.input_to);
+        AutoCompleteTextView toText = (AutoCompleteTextView) findViewById(R.id.input_to);
         String bufferTo = toText.getText().toString();
 
-        fromText.setText(bufferTo);
-        toText.setText(bufferFrom);
+        fromText.setText(bufferTo, false);
+        toText.setText(bufferFrom, false);
     }
 
     private void trySearch() {
