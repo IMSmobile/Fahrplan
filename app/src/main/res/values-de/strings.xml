@@ -6,7 +6,7 @@
     <string name="input_from">Ursprung</string>
     <string name="label_to">Nach:</string>
     <string name="input_to">Ziel</string>
-    <string name="waiting_text">Laden. Bitte warten...</string>
+    <string name="waiting_text">Laden. Bitte warten…</string>
     <string name="settings_title">Einstellungen</string>
     <string name="search_result_title">Verbindungen</string>
     <string name="day_short">t</string>
@@ -15,4 +15,8 @@
     <string name="label_about">Über</string>
     <string name="label_developers">Entwickler:</string>
     <string name="error_search_incomplete">Bitte Von und Nach eingeben.</string>
+    <string name="label_take_me_home">Take Me Home Adresse:</string>
+    <string name="input_take_me_home">Meine Adresse</string>
+    <string name="button_take_me_home">Nach Hause</string>
+    <string name="error_missing_take_me_home">Heimadresse in den Einstellungen nicht gesetzt.</string>
 </resources>

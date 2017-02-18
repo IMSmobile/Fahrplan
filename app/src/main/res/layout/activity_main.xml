@@ -48,7 +48,7 @@
         android:layout_below="@+id/input_from"
         android:layout_alignStart="@+id/input_from"
         android:labelFor="@+id/input_to"
-        android:id="@+id/lable_to" />
+        android:id="@+id/label_to" />
 
     <AutoCompleteTextView
         android:layout_width="match_parent"
@@ -57,8 +57,8 @@
         android:text=""
         android:textSize="18sp"
         android:hint="@string/input_to"
-        android:layout_below="@+id/lable_to"
-        android:layout_alignStart="@+id/lable_to"
+        android:layout_below="@+id/label_to"
+        android:layout_alignStart="@+id/label_to"
         android:id="@+id/input_to" />
 
     <TextView
@@ -84,11 +84,19 @@
             android:layout_alignParentStart="true" />
 
         <Button
+            android:text="@string/button_take_me_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_take_me_home"
+            android:layout_below="@+id/oppositeButton"
+            android:layout_alignParentStart="true" />
+
+        <Button
             android:text="@string/search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/btn_search"
-            android:layout_below="@+id/oppositeButton"
+            android:layout_below="@+id/btn_take_me_home"
             android:layout_alignParentStart="true" />
 
 

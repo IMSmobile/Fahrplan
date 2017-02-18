@@ -2,6 +2,7 @@ package io.github.imsmobile.fahrplan;
 
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         setDepartureTime(new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(new Date()));
         registerSearchButton();
         registerOppositeButton();
+        registerTakeMeHomeButton();
 
         AutoCompleteTextView inputFrom = (AutoCompleteTextView) findViewById(R.id.input_from);
         inputFrom.setAdapter(new StationAdapter(this, R.layout.autocomplete_item));
@@ -62,6 +64,26 @@ public class MainActivity extends AppCompatActivity {
                 startChangeDirection();
             }
         });
+    }
+
+    private void registerTakeMeHomeButton() {
+        Button buttonOne = (Button) findViewById(R.id.btn_take_me_home);
+        buttonOne.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                fillToWithTakeMeHome();
+            }
+        });
+    }
+
+    private void fillToWithTakeMeHome() {
+        SharedPreferences preferences = this.getSharedPreferences(getString(R.string.setting_name), MODE_PRIVATE);
+        String home = preferences.getString(getString(R.string.setting_key_take_me_home), "");
+        if(home.isEmpty()) {
+            Toast.makeText(this, this.getResources().getText(R.string.error_missing_take_me_home), Toast.LENGTH_LONG).show();
+        } else {
+            AutoCompleteTextView toText = (AutoCompleteTextView) findViewById(R.id.input_to);
+            toText.setText(home, false);
+        }
     }
 
     private void startChangeDirection() {
