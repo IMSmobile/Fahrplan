@@ -8,11 +8,14 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.google.common.base.Joiner;
+
 import org.joda.time.Period;
 import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -92,35 +95,33 @@ public class ConnectionAdapter extends BaseAdapter {
 
     @NonNull
     private String buildVehicles(Connection connection) {
-        StringBuilder vehicles = new StringBuilder();
+        List<String> journeys = getJourneys(connection);
+        return Joiner.on(ARROW).join(journeys);
+    }
+
+    private List<String> getJourneys(Connection connection) {
+        List<String> journeys = new ArrayList<>();
         for (Section section: connection.getSections()) {
             Journey journey = section.getJourney();
             if(journey != null) {
                 String category =  journey.getCategory();
                 switch(category) {
                     case "S":
-                        vehicles.append(category);
-                        vehicles.append(journey.getNumber());
+                        journeys.add(category + journey.getNumber());
                         break;
                     case "T":
-                        vehicles.append(TRAM_ICON);
-                        vehicles.append(journey.getNumber());
+                        journeys.add(TRAM_ICON + journey.getNumber());
                         break;
                     case "BUS":
                     case "NFB":
-                        vehicles.append(BUS_ICON);
-                        vehicles.append(journey.getNumber());
+                        journeys.add(BUS_ICON + journey.getNumber());
                         break;
                     default:
-                        vehicles.append(category);
+                        journeys.add(category);
                 }
-                vehicles.append(ARROW);
             }
         }
-        if(vehicles.length() > 0) {
-            vehicles.deleteCharAt(vehicles.length() - 1);
-        }
-        return vehicles.toString();
+        return journeys;
     }
 
     private String prettifyDuration(String duration) {
