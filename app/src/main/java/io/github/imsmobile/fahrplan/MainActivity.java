@@ -1,6 +1,5 @@
 package io.github.imsmobile.fahrplan;
 
-import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -15,7 +14,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -23,19 +21,26 @@ import java.util.Date;
 import java.util.Locale;
 
 import io.github.imsmobile.fahrplan.adapter.StationAdapter;
-import io.github.imsmobile.fahrplan.fragment.TimePickerFragment;
+import io.github.imsmobile.fahrplan.fragment.TimeDialogFragment;
+import io.github.imsmobile.fahrplan.fragment.listener.TimeDialogListener;
+import io.github.imsmobile.fahrplan.model.DepartureArrivalModel;
 
 public class MainActivity extends AppCompatActivity {
     public static final String FROM_MESSAGE = "io.github.imsmoble.fahrplan.from";
     public static final String TO_MESSAGE = "io.github.imsmoble.fahrplan.to";
-    public static final String DEPARTURE_MESSAGE = "io.github.imsmoble.fahrplan.departure";
+    public static final String DATETIME_MESSAGE = "io.github.imsmoble.fahrplan.departure";
+    public static final String IS_ARRIVAL_TIME_MESSAGE = "io.github.imsmoble.fahrplan.departureOrArrival";
+
+
+    private DepartureArrivalModel model = new DepartureArrivalModel();
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
-        setDepartureTime(new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(new Date()));
+        setDepartureTime(new Date());
         registerSearchButton();
         registerOppositeButton();
         registerTakeMeHomeButton();
@@ -118,7 +123,8 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SearchResultActivity.class);
         intent.putExtra(FROM_MESSAGE, from);
         intent.putExtra(TO_MESSAGE, to);
-        intent.putExtra(DEPARTURE_MESSAGE, departureTime);
+        intent.putExtra(DATETIME_MESSAGE, SimpleDateFormat.getDateTimeInstance().format(model.getSelectedDateTime().toDate()));
+        intent.putExtra(IS_ARRIVAL_TIME_MESSAGE, String.valueOf(model.isArrival()));
         startActivity(intent);
     }
 
@@ -154,24 +160,37 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intentAbout);
     }
     public void showTimePickerDialog(View view) {
-        TimePickerFragment fragment = new TimePickerFragment();
-        fragment.setOnTimeSetListener(new TimePickerDialog.OnTimeSetListener() {
+        TimeDialogFragment fragment = new TimeDialogFragment();
+        fragment.setDepartureArrivalModel(model);
+        fragment.setTimeDialogListener(new TimeDialogListener() {
             @Override
-            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                setDepartureTime(String.format(Locale.ENGLISH, "%02d", hourOfDay) + ":" + String.format(Locale.ENGLISH, "%02d", minute));
+            public void timeSelected(DepartureArrivalModel model) {
+                MainActivity.this.model = new DepartureArrivalModel(model);
+                setDepartureTime(model.getSelectedDateTime().toDate());
             }
         });
-        fragment.show(getSupportFragmentManager(), "timePicker");
+        fragment.show(getFragmentManager(), "Dialog Fragment");
     }
 
-    private void setDepartureTime(String departureTime) {
+    private void setDepartureTime(Date date) {
+        SimpleDateFormat df = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
         TextView editText = (TextView) findViewById(R.id.label_departure);
-        editText.setText(getDepartureTimePrefix()+ departureTime);
+        editText.setText(getDepartureTimePrefix()+ df .format(date));
     }
 
     @NonNull
     private String getDepartureTimePrefix() {
-        return getResources().getString(R.string.label_departure) + " ";
+        return getDepartureOrArrivalText()  + " ";
     }
+
+    private String getDepartureOrArrivalText() {
+        if (model.isDeparture()) {
+            return getResources().getString(R.string.label_departure);
+        } else {
+            return getResources().getString(R.string.label_arrival);
+        }
+    }
+
+
 
 }

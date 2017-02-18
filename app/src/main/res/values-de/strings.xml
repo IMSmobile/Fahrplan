@@ -15,6 +15,10 @@
     <string name="label_about">Über</string>
     <string name="label_developers">Entwickler:</string>
     <string name="error_search_incomplete">Bitte Von und Nach eingeben.</string>
+    <string name="label_date">Datum:</string>
+    <string name="label_arrival">Ankunftszeit:</string>
+    <string name="radio_departure">Abfahrt</string>
+    <string name="radio_arrival">Ankunft</string>
     <string name="label_take_me_home">Take Me Home Adresse:</string>
     <string name="input_take_me_home">Meine Adresse</string>
     <string name="button_take_me_home">Nach Hause</string>
