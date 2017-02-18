@@ -33,15 +33,19 @@ public class SearchResultActivity extends AppCompatActivity {
         String to = intent.getStringExtra(MainActivity.TO_MESSAGE);
         String arrivalTime = intent.getStringExtra(MainActivity.IS_ARRIVAL_TIME_MESSAGE);
         String dateTime = intent.getStringExtra(MainActivity.DATETIME_MESSAGE);
-        startSearch(from, to, arrivalTime, dateTime);
+        String isTrain = intent.getStringExtra(MainActivity.IS_TRAIN_MESSAGE);
+        String isTram = intent.getStringExtra(MainActivity.IS_TRAM_MESSAGE);
+        String isBus = intent.getStringExtra(MainActivity.IS_BUS_MESSAGE);
+        String isShip = intent.getStringExtra(MainActivity.IS_SHIP_MESSAGE);
+        startSearch(from, to, arrivalTime, dateTime, isTrain, isTram, isBus, isShip);
     }
 
-    private void startSearch(String from, String to, String arrivalTime, String dateTime) {
+    private void startSearch(String... params) {
         TextView fromView = (TextView) this.findViewById(R.id.result_from);
-        fromView.setText(from);
+        fromView.setText(params[0]);
         TextView toView = (TextView) this.findViewById(R.id.result_to);
-        toView.setText(to);
-        new ConnectionSearchTask(this).execute(from, to, arrivalTime, dateTime);
+        toView.setText(params[1]);
+        new ConnectionSearchTask(this).execute(params);
     }
 
 

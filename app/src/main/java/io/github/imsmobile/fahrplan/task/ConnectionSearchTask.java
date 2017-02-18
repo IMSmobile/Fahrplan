@@ -33,6 +33,11 @@ public class ConnectionSearchTask extends AsyncTask<String,Void,List<Connection>
         String to = params[1];
         boolean isArrival = Boolean.parseBoolean(params[2]);
         Date dateTime = getDate(params[3]);
+        boolean isTrain = Boolean.parseBoolean(params[4]);
+        boolean isTram = Boolean.parseBoolean(params[5]);
+        boolean isBus = Boolean.parseBoolean(params[6]);
+        boolean isShip = Boolean.parseBoolean(params[7]);
+
         String date = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(dateTime);
         String time =new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(dateTime);
         IOpenTransportRepository repo = OpenTransportRepositoryFactory.CreateOnlineOpenTransportRepository();

@@ -33,10 +33,10 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
         inputTakeMeHome.setText(getSettings(getString(R.string.setting_key_take_me_home), ""), false);
-        initTransportationSelection(R.id.cb_train, R.string.cb_train);
-        initTransportationSelection(R.id.cb_tram, R.string.cb_tram);
-        initTransportationSelection(R.id.cb_bus, R.string.cb_bus);
-        initTransportationSelection(R.id.cb_boat, R.string.cb_boat);
+        initTransportationSelection(R.id.cb_train, R.string.setting_transportation_train);
+        initTransportationSelection(R.id.cb_tram, R.string.setting_transportation_tram);
+        initTransportationSelection(R.id.cb_bus, R.string.setting_transportation_bus);
+        initTransportationSelection(R.id.cb_boat, R.string.setting_transportation_ship);
     }
 
     private void initTransportationSelection(@IdRes int checkboxId , @StringRes int keyResId) {
