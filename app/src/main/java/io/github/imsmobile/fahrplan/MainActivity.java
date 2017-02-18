@@ -81,8 +81,8 @@ public class MainActivity extends AppCompatActivity {
         if(home.isEmpty()) {
             Toast.makeText(this, this.getResources().getText(R.string.error_missing_take_me_home), Toast.LENGTH_LONG).show();
         } else {
-            EditText toText = (EditText) findViewById(R.id.input_to);
-            toText.setText(home);
+            AutoCompleteTextView toText = (AutoCompleteTextView) findViewById(R.id.input_to);
+            toText.setText(home, false);
         }
     }
 
