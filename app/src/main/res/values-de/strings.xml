@@ -23,4 +23,6 @@
     <string name="input_take_me_home">Meine Adresse</string>
     <string name="button_take_me_home">Nach Hause</string>
     <string name="error_missing_take_me_home">Heimadresse in den Einstellungen nicht gesetzt.</string>
+    <string name="label_favorite_add">Zu Favoriten hinzufügen</string>
+    <string name="label_favorite_remove">Von Favoriten entfernen</string>
 </resources>
