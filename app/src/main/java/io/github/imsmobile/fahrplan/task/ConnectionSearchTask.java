@@ -26,20 +26,9 @@ public class ConnectionSearchTask extends AsyncTask<ConnectionQuery,Void,List<Co
 
     @Override
     protected List<Connection> doInBackground(ConnectionQuery... params) {
-        ConnectionQuery query =  params[0];
-        String from = query.getFrom();
-        String to = query.getTo();
-        boolean isArrival = query.isArrivalTime();
-        boolean isTrain = query.isTrain();
-        boolean isTram = query.isTram();
-        boolean isBus = query.isBus();
-        boolean isShip = query.isShip();
-
-        String date = query.getDate();
-        String time =query.getTime();
         IOpenTransportRepository repo = OpenTransportRepositoryFactory.CreateOnlineOpenTransportRepository();
         try {
-            return repo.searchConnections(from, to, null, date, time, isArrival).getConnections();
+            return repo.searchConnections(params[0]).getConnections();
         } catch (OpenDataTransportException e) {
             Log.e(Constants.LOG, e.getMessage(), e);
             return Collections.emptyList();
