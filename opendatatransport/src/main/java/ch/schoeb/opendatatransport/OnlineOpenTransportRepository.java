@@ -130,7 +130,9 @@ public class OnlineOpenTransportRepository implements IOpenTransportRepository {
             if (isArrivalTime) {
                 url += "&isArrivalTime=1";
             }
-            url += Joiner.on("&").join(Lists.transform(transportations, transportationParamSuffix));
+            if (!transportations.isEmpty()) {
+                url += "&" + Joiner.on("&").join(Lists.transform(transportations, transportationParamSuffix));
+            }
 
         } catch (UnsupportedEncodingException e) {
 
