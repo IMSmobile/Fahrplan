@@ -1,0 +1,31 @@
+package io.github.imsmobile.fahrplan.model;
+
+import com.google.common.base.Objects;
+
+class FavoriteModelItem {
+    private String from;
+    private String to;
+
+    FavoriteModelItem(String from, String to) {
+        this.from = from;
+        this.to = to;
+    }
+
+    public String getFrom() {
+        return from;
+    }
+
+    public String getTo() {
+        return to;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof FavoriteModelItem && Objects.equal(((FavoriteModelItem) obj).getFrom().toLowerCase(), from.toLowerCase()) && Objects.equal(((FavoriteModelItem) obj).getTo().toLowerCase(), to.toLowerCase());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(to.toLowerCase(), from.toLowerCase());
+    }
+}
