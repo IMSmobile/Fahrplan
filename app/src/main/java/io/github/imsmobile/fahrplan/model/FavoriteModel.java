@@ -14,10 +14,10 @@ import io.github.imsmobile.fahrplan.R;
 import static android.content.Context.MODE_PRIVATE;
 
 public class FavoriteModel {
-    private Gson gson;
-    private Type favoritesType;
-    private AppCompatActivity context;
-    private SharedPreferences preferences;
+    private final Gson gson;
+    private final Type favoritesType;
+    private final AppCompatActivity context;
+    private final SharedPreferences preferences;
     private ArraySet<FavoriteModelItem> favorites;
 
     public FavoriteModel(AppCompatActivity context) {

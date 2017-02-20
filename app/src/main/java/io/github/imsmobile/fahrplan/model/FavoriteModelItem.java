@@ -3,8 +3,8 @@ package io.github.imsmobile.fahrplan.model;
 import com.google.common.base.Objects;
 
 class FavoriteModelItem {
-    private String from;
-    private String to;
+    private final String from;
+    private final String to;
 
     FavoriteModelItem(String from, String to) {
         this.from = from;
