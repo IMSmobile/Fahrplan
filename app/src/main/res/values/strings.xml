@@ -35,4 +35,5 @@
     <string name="cb_bus">&#128652; Bus</string>
     <string name="cb_boat">&#128674; Ship</string>
     <string name="label_connection">Connection</string>
+    <string name="label_share">Share</string>
 </resources>
