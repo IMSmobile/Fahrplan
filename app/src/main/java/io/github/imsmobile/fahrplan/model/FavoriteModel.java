@@ -40,10 +40,22 @@ public class FavoriteModel {
         favorites.remove(f);
         return saveToSettings();
     }
+    public boolean remove(int pos) {
+        favorites.removeAt(pos);
+        return saveToSettings();
+    }
 
     public boolean contains(String from, String to) {
         FavoriteModelItem f = new FavoriteModelItem(from, to);
         return favorites.contains(f);
+    }
+
+    public int size() {
+        return favorites.size();
+    }
+
+    public FavoriteModelItem get(int pos) {
+        return favorites.valueAt(pos);
     }
 
     private void loadFromSettings() {

@@ -99,6 +99,11 @@
             android:layout_below="@+id/btn_take_me_home"
             android:layout_alignParentStart="true" />
 
+        <ListView
+            android:id="@+id/list_favorites"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_search"/>
 
     </RelativeLayout>
 

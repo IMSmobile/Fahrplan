@@ -2,7 +2,7 @@ package io.github.imsmobile.fahrplan.model;
 
 import com.google.common.base.Objects;
 
-class FavoriteModelItem {
+public class FavoriteModelItem {
     private final String from;
     private final String to;
 
@@ -17,6 +17,11 @@ class FavoriteModelItem {
 
     public String getTo() {
         return to;
+    }
+
+    @Override
+    public String toString() {
+        return from + " \u279C " + to;
     }
 
     @Override
