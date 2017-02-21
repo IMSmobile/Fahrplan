@@ -24,6 +24,7 @@ import ch.schoeb.opendatatransport.model.Connection;
 import ch.schoeb.opendatatransport.model.Journey;
 import ch.schoeb.opendatatransport.model.Section;
 import io.github.imsmobile.fahrplan.R;
+import io.github.imsmobile.fahrplan.SearchResultActivity;
 
 public class ConnectionAdapter extends BaseAdapter {
 
@@ -63,9 +64,17 @@ public class ConnectionAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.search_item, parent, false);
         }
 
-        Connection connection = (Connection) getItem(position);
+        final Connection connection = (Connection) getItem(position);
 
         fillConnectionItem(convertView, connection);
+
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchResultActivity s = (SearchResultActivity) context;
+                s.startConnectionActivity(connection);
+            }
+        });
 
         return convertView;
     }

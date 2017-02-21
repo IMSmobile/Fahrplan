@@ -9,6 +9,8 @@ import android.support.v7.widget.Toolbar;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,6 +24,8 @@ import io.github.imsmobile.fahrplan.task.ConnectionSearchTask;
 import io.github.imsmobile.fahrplan.ui.ProgressDialogUI;
 
 public class SearchResultActivity extends AppCompatActivity {
+
+    public static final String CONNECTION = "io.github.imsmoble.fahrplan.connection";
 
     private ProgressDialog dialog;
 
@@ -64,6 +68,13 @@ public class SearchResultActivity extends AppCompatActivity {
         new ConnectionSearchTask(this).execute(query);
     }
 
+    public void startConnectionActivity(Connection connection) {
+        Gson gson = new Gson();
+        String json = gson.toJson(connection);
+        Intent intent = new Intent(this, ConnectionActivity.class);
+        intent.putExtra(CONNECTION, json);
+        startActivity(intent);
+    }
 
     public void setResult(List<Connection> connections) {
         ListView listView = (ListView)findViewById(R.id.result_list);
