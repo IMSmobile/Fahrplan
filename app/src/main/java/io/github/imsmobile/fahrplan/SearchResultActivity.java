@@ -46,8 +46,8 @@ public class SearchResultActivity extends AppCompatActivity {
         from = intent.getStringExtra(MainActivity.FROM_MESSAGE);
         to = intent.getStringExtra(MainActivity.TO_MESSAGE);
         ConnectionQuery query = new ConnectionQuery();
-        query.setFrom(intent.getStringExtra(MainActivity.FROM_MESSAGE));
-        query.setTo(intent.getStringExtra(MainActivity.TO_MESSAGE));
+        query.setFrom(from);
+        query.setTo(to);
         query.setArrivalTime(Boolean.parseBoolean(intent.getStringExtra(MainActivity.IS_ARRIVAL_TIME_MESSAGE)));
         Date dateTime = getDate(intent.getStringExtra(MainActivity.DATETIME_MESSAGE));
         query.setDate(new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(dateTime));
