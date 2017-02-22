@@ -29,6 +29,9 @@
     <string name="setting_key_take_me_home" translatable="false">setting_take_me_home</string>
     <string name="button_take_me_home">Take me home</string>
     <string name="error_missing_take_me_home">Take me home address not configured.</string>
+    <string name="label_favorite_add">Add to Favorites</string>
+    <string name="label_favorite_remove">Remove from Favorites</string>
+    <string name="setting_favorites" translatable="false">setting_favorites</string>
     <string name="label_transportations">Transportations:</string>
     <string name="cb_train">&#128646; Train</string>
     <string name="cb_tram">&#128651; Tram</string>
