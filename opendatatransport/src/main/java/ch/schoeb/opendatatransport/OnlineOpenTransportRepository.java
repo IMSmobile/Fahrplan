@@ -1,5 +1,8 @@
 package ch.schoeb.opendatatransport;
 
+import com.google.common.base.Function;
+import com.google.common.base.Joiner;
+import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -9,8 +12,12 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import ch.schoeb.opendatatransport.model.ConnectionList;
+import ch.schoeb.opendatatransport.model.ConnectionQuery;
 import ch.schoeb.opendatatransport.model.StationList;
 
 public class OnlineOpenTransportRepository implements IOpenTransportRepository {
@@ -38,13 +45,49 @@ public class OnlineOpenTransportRepository implements IOpenTransportRepository {
         return searchConnections(from, to, null, null, null, false);
     }
 
-    @Override
     public ConnectionList searchConnections(String from, String to, String via, String date, String time, Boolean isArrivalTime) throws OpenDataTransportException {
-        String url = buildSearchConnectionUrl(from, to, via, date, time, isArrivalTime);
+        String url = buildSearchConnectionUrl(from, to, via, date, time, Collections.<String>emptyList(), isArrivalTime);
         String json = GetJson(url);
 
         Gson gson = new Gson();
         return gson.fromJson(json, ConnectionList.class);
+    }
+
+    public ConnectionList searchConnections(String from, String to, String via, String date, String time,List<String> transportations, Boolean isArrivalTime) throws OpenDataTransportException {
+        String url = buildSearchConnectionUrl(from, to, via, date, time,transportations, isArrivalTime);
+        String json = GetJson(url);
+
+        Gson gson = new Gson();
+        return gson.fromJson(json, ConnectionList.class);
+    }
+
+    @Override
+    public ConnectionList searchConnections(ConnectionQuery query) throws OpenDataTransportException {
+        return searchConnections(query.getFrom(), query.getTo(), null, query.getDate(), query.getTime(), getTransporations(query), query.isArrivalTime());
+    }
+
+    private List<String> getTransporations(ConnectionQuery query) {
+        List<String> transportations = new ArrayList<>();
+        if (query.isTrain()) {
+            transportations.add("ice_tgv_rj");
+            transportations.add("ec_ic");
+            transportations.add("ir");
+            transportations.add("re_d");
+            transportations.add("s_sn_r");
+            transportations.add("cableway");
+            transportations.add("arz_ext");
+        }
+        if (query.isTram()) {
+            transportations.add("tramway_underground");
+        }
+        if (query.isBus()) {
+            transportations.add("bus");
+
+        }
+        if (query.isShip()) {
+            transportations.add("ship");
+        }
+        return transportations;
     }
 
     private String GetJson(String url) throws OpenDataTransportException {
@@ -67,7 +110,7 @@ public class OnlineOpenTransportRepository implements IOpenTransportRepository {
         }
     }
 
-    private String buildSearchConnectionUrl(String from, String to, String via, String date, String time, Boolean isArrivalTime) {
+    private String buildSearchConnectionUrl(String from, String to, String via, String date, String time, List<String> transportations,  Boolean isArrivalTime) {
         String url = null;
         try {
             url = "http://transport.opendata.ch/v1/connections?from=" + URLEncoder.encode(from, "UTF-8") + "&to=" + URLEncoder.encode(to, "UTF-8");
@@ -87,10 +130,19 @@ public class OnlineOpenTransportRepository implements IOpenTransportRepository {
             if (isArrivalTime) {
                 url += "&isArrivalTime=1";
             }
+            if (!transportations.isEmpty()) {
+                url += "&" + Joiner.on("&").join(Lists.transform(transportations, transportationParamSuffix));
+            }
 
         } catch (UnsupportedEncodingException e) {
 
         }
         return url;
     }
+
+    private Function<String, String> transportationParamSuffix = new Function<String, String>() {
+        public String apply(String transportation) {
+            return "transportations[]=" + transportation;
+        }
+    };
 }

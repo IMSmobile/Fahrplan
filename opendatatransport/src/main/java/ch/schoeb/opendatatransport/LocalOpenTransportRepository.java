@@ -5,6 +5,7 @@ import java.util.Random;
 
 import ch.schoeb.opendatatransport.model.Connection;
 import ch.schoeb.opendatatransport.model.ConnectionList;
+import ch.schoeb.opendatatransport.model.ConnectionQuery;
 import ch.schoeb.opendatatransport.model.Station;
 import ch.schoeb.opendatatransport.model.StationList;
 
@@ -30,6 +31,10 @@ public class LocalOpenTransportRepository implements IOpenTransportRepository {
         return searchConnections(from, to, null, null, null, false);
     }
 
+    @Override
+    public ConnectionList searchConnections(ConnectionQuery query) throws OpenDataTransportException {
+        return searchConnections(query.getFrom(), query.getTo(), null, query.getDate(), query.getTime(), query.isArrivalTime());
+    }
     @Override
     public ConnectionList searchConnections(String from, String to, String via, String date, String time, Boolean isArrivalTime) {
         ArrayList<Connection> connections = new ArrayList<>();

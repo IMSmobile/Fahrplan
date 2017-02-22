@@ -25,4 +25,9 @@
     <string name="error_missing_take_me_home">Heimadresse in den Einstellungen nicht gesetzt.</string>
     <string name="label_favorite_add">Zu Favoriten hinzufügen</string>
     <string name="label_favorite_remove">Von Favoriten entfernen</string>
+    <string name="label_transportations">Transportmittel:</string>
+    <string name="cb_train">&#128646; Zug</string>
+    <string name="cb_tram">&#128651; Tram</string>
+    <string name="cb_bus">&#128652; Bus</string>
+    <string name="cb_boat">&#128674; Schiff</string>
 </resources>
