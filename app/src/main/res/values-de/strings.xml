@@ -30,4 +30,5 @@
     <string name="cb_tram">&#128651; Tram</string>
     <string name="cb_bus">&#128652; Bus</string>
     <string name="cb_boat">&#128674; Schiff</string>
+    <string name="sourcefiles_text">Quellcode verfügbar unter:\nhttps://github.com/IMSmobile/Fahrplan</string>
 </resources>

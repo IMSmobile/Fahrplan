@@ -37,4 +37,7 @@
     <string name="cb_tram">&#128651; Tram</string>
     <string name="cb_bus">&#128652; Bus</string>
     <string name="cb_boat">&#128674; Ship</string>
+    <string name="sourcefiles_text">Sourcefiles available under:\nhttps://github.com/IMSmobile/Fahrplan</string>
+    <string name="transport_app_name" translatable="false">Transport APP</string>
+    <string name="appiconimage">appIconImage</string>
 </resources>
