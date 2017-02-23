@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_about"
     android:layout_width="match_parent"
@@ -10,28 +11,71 @@
         android:id="@+id/toolbar_layout"
         layout="@layout/toolbar"/>
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/ic_launcher"
+        android:id="@+id/imageView"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingTop="20dp"
+        android:layout_below="@+id/toolbar_layout"
+        android:layout_alignParentStart="true"
+        android:contentDescription="@string/appiconimage"/>
+
+    <TextView
+        android:text="@string/label_developers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/DeveloperTitle"
+        android:textSize="24sp"
+        android:textStyle="normal|bold"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:layout_marginTop="11dp"
+        android:layout_below="@+id/label_sourcefiles"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="@string/sourcefiles_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:id="@+id/label_sourcefiles"
+        android:autoLink="web"
+        android:layout_below="@+id/imageView"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp" />
+
     <TextView
         android:text="@string/developerNameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/developerNameText"
         android:textSize="18sp"
-        android:layout_marginTop="60dp"
-        android:layout_below="@+id/toolbar_layout"
-        android:layout_alignParentStart="true"
         android:paddingStart="10dp"
-        android:paddingEnd="10dp"/>
+        android:paddingEnd="10dp"
+        android:autoLink="email"
+        android:layout_below="@+id/DeveloperTitle"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp" />
 
     <TextView
-        android:text="@string/label_developers"
+        android:text=""
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar_layout"
-        android:layout_alignParentStart="true"
-        android:id="@+id/DeveloperTitle"
+        android:id="@+id/label_version"
+        android:layout_alignBottom="@+id/imageView"
+        android:layout_toEndOf="@+id/imageView" />
+
+    <TextView
+        android:text="@string/transport_app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/TitleofApp"
         android:textSize="24sp"
-        android:textStyle="normal|bold"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"/>
+        android:layout_above="@+id/label_version"
+        android:layout_toEndOf="@+id/imageView" />
 
 </RelativeLayout>

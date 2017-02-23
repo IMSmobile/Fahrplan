@@ -25,4 +25,7 @@
     <string name="setting_key_take_me_home" translatable="false">setting_take_me_home</string>
     <string name="button_take_me_home">Take me home</string>
     <string name="error_missing_take_me_home">Take me home address not configured.</string>
+    <string name="sourcefiles_text">Sourcefiles avaible under:\nhttps://github.com/IMSmobile/Fahrplan</string>
+    <string name="transport_app_name">Transport APP</string>
+    <string name="appiconimage">appIconImage</string>
 </resources>
