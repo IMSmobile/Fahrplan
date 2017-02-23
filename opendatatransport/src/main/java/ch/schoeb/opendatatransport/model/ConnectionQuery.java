@@ -1,9 +1,5 @@
 package ch.schoeb.opendatatransport.model;
 
-/**
- * Created by Sandro on 19.02.2017.
- */
-
 public class ConnectionQuery {
     private String from;
     private String to;
@@ -14,6 +10,8 @@ public class ConnectionQuery {
     private boolean tram;
     private boolean bus;
     private boolean ship;
+    private int page;
+    private int limit = 6;
 
     public void setFrom(String from) {
         this.from = from;
@@ -85,5 +83,17 @@ public class ConnectionQuery {
 
     public boolean isShip() {
         return ship;
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getLimit() {
+        return limit;
     }
 }
