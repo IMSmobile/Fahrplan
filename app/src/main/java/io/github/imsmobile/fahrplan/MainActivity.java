@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,10 +22,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import io.github.imsmobile.fahrplan.adapter.FavoriteAdapter;
 import io.github.imsmobile.fahrplan.adapter.StationAdapter;
 import io.github.imsmobile.fahrplan.fragment.TimeDialogFragment;
 import io.github.imsmobile.fahrplan.fragment.listener.TimeDialogListener;
 import io.github.imsmobile.fahrplan.model.DepartureArrivalModel;
+import io.github.imsmobile.fahrplan.model.FavoriteModel;
+import io.github.imsmobile.fahrplan.model.FavoriteModelItem;
 
 public class MainActivity extends AppCompatActivity {
     public static final String FROM_MESSAGE = "io.github.imsmoble.fahrplan.from";
@@ -38,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private DepartureArrivalModel model = new DepartureArrivalModel();
+    private FavoriteModel favorite;
 
 
     @Override
@@ -56,6 +61,10 @@ public class MainActivity extends AppCompatActivity {
         AutoCompleteTextView inputTo= (AutoCompleteTextView) findViewById(R.id.input_to);
         inputTo.setAdapter(new StationAdapter(this, R.layout.autocomplete_item));
 
+        favorite = new FavoriteModel(this);
+        ListView listView = (ListView)findViewById(R.id.list_favorites);
+        FavoriteAdapter favoriteadapter = new FavoriteAdapter(this, favorite);
+        listView.setAdapter(favoriteadapter);
     }
 
     private void registerSearchButton() {
@@ -161,6 +170,18 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void removeFavorite(int position) {
+        favorite.remove(position);
+    }
+
+    public void activateFavorite(int position) {
+        FavoriteModelItem fav = favorite.get(position);
+        AutoCompleteTextView fromText = (AutoCompleteTextView) findViewById(R.id.input_from);
+        AutoCompleteTextView toText = (AutoCompleteTextView) findViewById(R.id.input_to);
+        fromText.setText(fav.getFrom(), false);
+        toText.setText(fav.getTo(), false);
     }
 
     private void startSettingActivity() {

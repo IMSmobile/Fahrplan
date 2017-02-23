@@ -23,11 +23,14 @@
     <string name="input_take_me_home">Meine Adresse</string>
     <string name="button_take_me_home">Nach Hause</string>
     <string name="error_missing_take_me_home">Heimadresse in den Einstellungen nicht gesetzt.</string>
+    <string name="label_favorite_add">Zu Favoriten hinzufügen</string>
+    <string name="label_favorite_remove">Von Favoriten entfernen</string>
     <string name="label_transportations">Transportmittel:</string>
     <string name="cb_train">&#128646; Zug</string>
     <string name="cb_tram">&#128651; Tram</string>
     <string name="cb_bus">&#128652; Bus</string>
     <string name="cb_boat">&#128674; Schiff</string>
+    <string name="sourcefiles_text">Quellcode verfügbar unter:\nhttps://github.com/IMSmobile/Fahrplan</string>
     <string name="label_connection">Verbindung</string>
     <string name="label_share">Teilen</string>
     <string name="connection_on_track">auf Gleis</string>

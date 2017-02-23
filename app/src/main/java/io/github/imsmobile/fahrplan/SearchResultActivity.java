@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -20,6 +23,7 @@ import java.util.Locale;
 import ch.schoeb.opendatatransport.model.Connection;
 import ch.schoeb.opendatatransport.model.ConnectionQuery;
 import io.github.imsmobile.fahrplan.adapter.ConnectionAdapter;
+import io.github.imsmobile.fahrplan.model.FavoriteModel;
 import io.github.imsmobile.fahrplan.task.ConnectionSearchTask;
 import io.github.imsmobile.fahrplan.ui.ProgressDialogUI;
 
@@ -28,6 +32,9 @@ public class SearchResultActivity extends AppCompatActivity {
     public static final String CONNECTION = "io.github.imsmoble.fahrplan.connection";
 
     private ProgressDialog dialog;
+    private String from;
+    private String to;
+    private FavoriteModel favorites;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,11 +43,15 @@ public class SearchResultActivity extends AppCompatActivity {
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(getResources().getString(R.string.search_result_title));
+        favorites = new FavoriteModel(this);
 
         Intent intent = getIntent();
+
+        from = intent.getStringExtra(MainActivity.FROM_MESSAGE);
+        to = intent.getStringExtra(MainActivity.TO_MESSAGE);
         ConnectionQuery query = new ConnectionQuery();
-        query.setFrom(intent.getStringExtra(MainActivity.FROM_MESSAGE));
-        query.setTo(intent.getStringExtra(MainActivity.TO_MESSAGE));
+        query.setFrom(from);
+        query.setTo(to);
         query.setArrivalTime(Boolean.parseBoolean(intent.getStringExtra(MainActivity.IS_ARRIVAL_TIME_MESSAGE)));
         Date dateTime = getDate(intent.getStringExtra(MainActivity.DATETIME_MESSAGE));
         query.setDate(new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(dateTime));
@@ -50,6 +61,7 @@ public class SearchResultActivity extends AppCompatActivity {
         query.setBus(Boolean.parseBoolean(intent.getStringExtra(MainActivity.IS_BUS_MESSAGE)));
         query.setShip(Boolean.parseBoolean(intent.getStringExtra(MainActivity.IS_SHIP_MESSAGE)));
         startSearch(query);
+
     }
 
     private Date getDate(String date) {
@@ -68,12 +80,37 @@ public class SearchResultActivity extends AppCompatActivity {
         new ConnectionSearchTask(this).execute(query);
     }
 
+
     public void startConnectionActivity(Connection connection) {
         Gson gson = new Gson();
         String json = gson.toJson(connection);
         Intent intent = new Intent(this, ConnectionActivity.class);
         intent.putExtra(CONNECTION, json);
         startActivity(intent);
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        if(favorites.contains(from, to)) {
+            inflater.inflate(R.menu.favorite_on, menu);
+        } else {
+            inflater.inflate(R.menu.favorite_off, menu);
+        }
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_favorite_add:
+                favorites.add(from, to);
+                return true;
+            case R.id.action_favorite_remove:
+                favorites.remove(from, to);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public void setResult(List<Connection> connections) {
