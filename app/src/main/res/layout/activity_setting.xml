@@ -40,5 +40,44 @@
         android:layout_below="@+id/label_take_me_home"
         android:layout_alignStart="@+id/label_take_me_home" />
 
+    <TextView
+            android:text="@string/label_transportations"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/input_take_me_home"
+            android:id="@+id/label_transportations"
+            android:labelFor="@+id/label_transportations"
+            android:layout_alignParentStart="true"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/label_transportations"
+            android:orientation="horizontal">
+            <CheckBox
+                android:text="@string/cb_train"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cb_train" />
+            <CheckBox
+                android:text="@string/cb_tram"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cb_tram" />
+            <CheckBox
+                android:text="@string/cb_bus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cb_bus" />
+            <CheckBox
+                android:text="@string/cb_boat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cb_boat" />
+        </LinearLayout>
+
+
+
     </RelativeLayout>
 </RelativeLayout>

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,19 +22,27 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import io.github.imsmobile.fahrplan.adapter.FavoriteAdapter;
 import io.github.imsmobile.fahrplan.adapter.StationAdapter;
 import io.github.imsmobile.fahrplan.fragment.TimeDialogFragment;
 import io.github.imsmobile.fahrplan.fragment.listener.TimeDialogListener;
 import io.github.imsmobile.fahrplan.model.DepartureArrivalModel;
+import io.github.imsmobile.fahrplan.model.FavoriteModel;
+import io.github.imsmobile.fahrplan.model.FavoriteModelItem;
 
 public class MainActivity extends AppCompatActivity {
     public static final String FROM_MESSAGE = "io.github.imsmoble.fahrplan.from";
     public static final String TO_MESSAGE = "io.github.imsmoble.fahrplan.to";
     public static final String DATETIME_MESSAGE = "io.github.imsmoble.fahrplan.departure";
     public static final String IS_ARRIVAL_TIME_MESSAGE = "io.github.imsmoble.fahrplan.departureOrArrival";
+    public static final String IS_TRAIN_MESSAGE = "io.github.imsmoble.fahrplan.train.active";
+    public static final String IS_TRAM_MESSAGE = "io.github.imsmoble.fahrplan.tram.active";
+    public static final String IS_BUS_MESSAGE = "io.github.imsmoble.fahrplan.bus.active";
+    public static final String IS_SHIP_MESSAGE = "io.github.imsmoble.fahrplan.ship.active";
 
 
     private DepartureArrivalModel model = new DepartureArrivalModel();
+    private FavoriteModel favorite;
 
 
     @Override
@@ -51,6 +61,10 @@ public class MainActivity extends AppCompatActivity {
         AutoCompleteTextView inputTo= (AutoCompleteTextView) findViewById(R.id.input_to);
         inputTo.setAdapter(new StationAdapter(this, R.layout.autocomplete_item));
 
+        favorite = new FavoriteModel(this);
+        ListView listView = (ListView)findViewById(R.id.list_favorites);
+        FavoriteAdapter favoriteadapter = new FavoriteAdapter(this, favorite);
+        listView.setAdapter(favoriteadapter);
     }
 
     private void registerSearchButton() {
@@ -81,14 +95,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void fillToWithTakeMeHome() {
-        SharedPreferences preferences = this.getSharedPreferences(getString(R.string.setting_name), MODE_PRIVATE);
-        String home = preferences.getString(getString(R.string.setting_key_take_me_home), "");
+        String home = getSettings(R.string.setting_key_take_me_home, "");
         if(home.isEmpty()) {
             Toast.makeText(this, this.getResources().getText(R.string.error_missing_take_me_home), Toast.LENGTH_LONG).show();
         } else {
             AutoCompleteTextView toText = (AutoCompleteTextView) findViewById(R.id.input_to);
             toText.setText(home, false);
         }
+    }
+
+    private String getSettings(@StringRes int keyResId, String defaultValue) {
+        String key = getString(keyResId);
+        SharedPreferences preferences = this.getSharedPreferences(getString(R.string.setting_name), MODE_PRIVATE);
+        return preferences.getString(key, defaultValue);
     }
 
     private void startChangeDirection() {
@@ -125,9 +144,12 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra(TO_MESSAGE, to);
         intent.putExtra(DATETIME_MESSAGE, SimpleDateFormat.getDateTimeInstance().format(model.getSelectedDateTime().toDate()));
         intent.putExtra(IS_ARRIVAL_TIME_MESSAGE, String.valueOf(model.isArrival()));
+        intent.putExtra(IS_TRAIN_MESSAGE, getSettings(R.string.setting_transportation_train, String.valueOf(Boolean.TRUE)));
+        intent.putExtra(IS_TRAM_MESSAGE, getSettings(R.string.setting_transportation_tram, String.valueOf(Boolean.TRUE)));
+        intent.putExtra(IS_BUS_MESSAGE, getSettings(R.string.setting_transportation_bus, String.valueOf(Boolean.TRUE)));
+        intent.putExtra(IS_SHIP_MESSAGE, getSettings(R.string.setting_transportation_ship, String.valueOf(Boolean.TRUE)));
         startActivity(intent);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -148,6 +170,18 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void removeFavorite(int position) {
+        favorite.remove(position);
+    }
+
+    public void activateFavorite(int position) {
+        FavoriteModelItem fav = favorite.get(position);
+        AutoCompleteTextView fromText = (AutoCompleteTextView) findViewById(R.id.input_from);
+        AutoCompleteTextView toText = (AutoCompleteTextView) findViewById(R.id.input_to);
+        fromText.setText(fav.getFrom(), false);
+        toText.setText(fav.getTo(), false);
     }
 
     private void startSettingActivity() {
