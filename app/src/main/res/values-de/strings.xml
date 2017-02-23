@@ -30,4 +30,6 @@
     <string name="cb_boat">&#128674; Schiff</string>
     <string name="label_connection">Verbindung</string>
     <string name="label_share">Teilen</string>
+    <string name="connection_on_track">auf Gleis</string>
+    <string name="connection_heading_to">Richtung</string>
 </resources>

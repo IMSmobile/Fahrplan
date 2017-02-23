@@ -36,4 +36,6 @@
     <string name="cb_boat">&#128674; Ship</string>
     <string name="label_connection">Connection</string>
     <string name="label_share">Share</string>
+    <string name="connection_on_track">on track</string>
+    <string name="connection_heading_to">heading to</string>
 </resources>
