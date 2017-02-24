@@ -90,6 +90,7 @@ public class SearchResultActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ConnectionActivity.class);
         intent.putExtra(CONNECTION, json);
         startActivity(intent);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
