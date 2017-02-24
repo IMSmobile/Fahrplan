@@ -30,6 +30,11 @@
     <string name="cb_tram">&#128651; Tram</string>
     <string name="cb_bus">&#128652; Bus</string>
     <string name="cb_boat">&#128674; Schiff</string>
+    <string name="sourcefiles_text">Quellcode verfügbar unter:\nhttps://github.com/IMSmobile/Fahrplan</string>
+    <string name="label_connection">Verbindung</string>
+    <string name="label_share">Teilen</string>
+    <string name="connection_on_track">auf Gleis</string>
+    <string name="connection_heading_to">Richtung</string>
     <string name="label_classes">Klassen:</string>
     <string name="cb_firstclass">Erste Klasse</string>
     <string name="cb_secondclass">Zweite Klasse</string>
