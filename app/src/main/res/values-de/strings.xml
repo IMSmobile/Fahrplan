@@ -35,4 +35,7 @@
     <string name="label_share">Teilen</string>
     <string name="connection_on_track">auf Gleis</string>
     <string name="connection_heading_to">Richtung</string>
+    <string name="label_classes">Zeige Auslastung von:</string>
+    <string name="cb_firstclass">Erster Klasse</string>
+    <string name="cb_secondclass">Zweiter Klasse</string>
 </resources>

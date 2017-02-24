@@ -1,6 +1,7 @@
 package io.github.imsmobile.fahrplan.adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,7 @@ import ch.schoeb.opendatatransport.model.Journey;
 import ch.schoeb.opendatatransport.model.Section;
 import io.github.imsmobile.fahrplan.R;
 import io.github.imsmobile.fahrplan.SearchResultActivity;
+
 
 public class ConnectionAdapter extends BaseAdapter {
 
@@ -91,11 +93,11 @@ public class ConnectionAdapter extends BaseAdapter {
 
     private String buildOccupancy(Connection connection) {
         StringBuilder occupancy = new StringBuilder();
-        if(connection.getCapacity1st() != null) {
+        if((connection.getCapacity1st() != null) && Boolean.valueOf(getSettings(context.getString(R.string.setting_classes_first), String.valueOf(true)))) {
             occupancy.append(" 1.");
             occupancy.append((char) (OCCUPANCY + connection.getCapacity1st().intValue()*2));
         }
-        if(connection.getCapacity2nd() != null) {
+        if((connection.getCapacity2nd() != null) && Boolean.valueOf(getSettings(context.getString(R.string.setting_classes_second), String.valueOf(true)))) {
             occupancy.append(" 2.");
             occupancy.append((char) (OCCUPANCY + connection.getCapacity2nd().intValue()*2));
         }
@@ -162,4 +164,8 @@ public class ConnectionAdapter extends BaseAdapter {
         fromTextView.setText(str);
     }
 
+    private String getSettings(String key, String defaultValue) {
+        SharedPreferences preferences = context.getSharedPreferences(context.getString(R.string.setting_name), Context.MODE_PRIVATE);
+        return preferences.getString(key, defaultValue);
+    }
 }
