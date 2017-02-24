@@ -46,7 +46,7 @@
     <string name="label_share">Share</string>
     <string name="connection_on_track">on track</string>
     <string name="connection_heading_to">heading to</string>
-    <string name="label_classes">Classes:</string>
+    <string name="label_classes">Show occupancy for:</string>
     <string name="cb_firstclass">First Class</string>
     <string name="cb_secondclass">Second Class</string>
 </resources>
