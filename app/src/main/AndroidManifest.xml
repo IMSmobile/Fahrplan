@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".SearchResultActivity" android:parentActivityName=".MainActivity" />
+        <activity android:name=".ConnectionActivity" android:parentActivityName=".MainActivity" />
         <activity android:name=".SettingActivity" android:parentActivityName=".MainActivity"/>
         <activity android:name=".AboutActivity" android:parentActivityName=".MainActivity"/>
     </application>
