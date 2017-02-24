@@ -49,4 +49,11 @@
     <string name="label_classes">Show occupancy for:</string>
     <string name="cb_firstclass">First Class</string>
     <string name="cb_secondclass">Second Class</string>
+
+    <string name="icon_train" translatable="false">&#128646;</string>
+    <string name="icon_tram" translatable="false">&#128651;</string>
+    <string name="icon_bus" translatable="false">&#128652;</string>
+    <string name="icon_boat"  translatable="false">&#128674;</string>
+    <string name="icon_rightward_arrow" translatable="false">&#10140;</string>
+    <string name="icon_occupancy" translatable="false">&#9601;</string>
 </resources>

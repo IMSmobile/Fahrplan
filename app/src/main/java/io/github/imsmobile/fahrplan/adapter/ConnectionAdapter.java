@@ -33,11 +33,6 @@ public class ConnectionAdapter extends BaseAdapter {
     private final Context context;
     private final List<Connection> connections;
     private static final DateFormat DF = DateFormat.getTimeInstance(DateFormat.SHORT);
-    private static final String TRAM_ICON = "\uD83D\uDE8B";
-    private static final String BUS_ICON = "\uD83D\uDE8C";
-    private static final String ARROW = "\u279C";
-    private static final char OCCUPANCY = '\u2581';
-
     public ConnectionAdapter(Context context, List<Connection> connections) {
         this.context = context;
         this.connections = connections;
@@ -95,19 +90,24 @@ public class ConnectionAdapter extends BaseAdapter {
         StringBuilder occupancy = new StringBuilder();
         if((connection.getCapacity1st() != null) && Boolean.valueOf(getSettings(context.getString(R.string.setting_classes_first), String.valueOf(true)))) {
             occupancy.append(" 1.");
-            occupancy.append((char) (OCCUPANCY + connection.getCapacity1st().intValue()*2));
+            occupancy.append((char) (getLowOccupanyIcon() + connection.getCapacity1st().intValue()*2));
         }
         if((connection.getCapacity2nd() != null) && Boolean.valueOf(getSettings(context.getString(R.string.setting_classes_second), String.valueOf(true)))) {
             occupancy.append(" 2.");
-            occupancy.append((char) (OCCUPANCY + connection.getCapacity2nd().intValue()*2));
+            occupancy.append((char) (getLowOccupanyIcon() + connection.getCapacity2nd().intValue()*2));
         }
         return occupancy.toString();
+    }
+
+    private char getLowOccupanyIcon() {
+        return context.getString(R.string.icon_occupancy).charAt(0);
     }
 
     @NonNull
     private String buildVehicles(Connection connection) {
         List<String> journeys = getJourneys(connection);
-        return Joiner.on(ARROW).join(journeys);
+        String iconRightArrow = context.getString(R.string.icon_rightward_arrow);
+        return Joiner.on(iconRightArrow).join(journeys);
     }
 
     private List<String> getJourneys(Connection connection) {
@@ -121,11 +121,11 @@ public class ConnectionAdapter extends BaseAdapter {
                         journeys.add(category + journey.getNumber());
                         break;
                     case "T":
-                        journeys.add(TRAM_ICON + journey.getNumber());
+                        journeys.add(context.getString(R.string.icon_tram) + journey.getNumber());
                         break;
                     case "BUS":
                     case "NFB":
-                        journeys.add(BUS_ICON + journey.getNumber());
+                        journeys.add(context.getString(R.string.icon_bus) + journey.getNumber());
                         break;
                     default:
                         journeys.add(category);
