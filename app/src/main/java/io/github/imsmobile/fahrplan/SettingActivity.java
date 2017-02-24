@@ -33,13 +33,15 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
         inputTakeMeHome.setText(getSettings(getString(R.string.setting_key_take_me_home), ""), false);
-        initTransportationSelection(R.id.cb_train, R.string.setting_transportation_train);
-        initTransportationSelection(R.id.cb_tram, R.string.setting_transportation_tram);
-        initTransportationSelection(R.id.cb_bus, R.string.setting_transportation_bus);
-        initTransportationSelection(R.id.cb_boat, R.string.setting_transportation_ship);
+        initSettingSelection(R.id.cb_train, R.string.setting_transportation_train);
+        initSettingSelection(R.id.cb_tram, R.string.setting_transportation_tram);
+        initSettingSelection(R.id.cb_bus, R.string.setting_transportation_bus);
+        initSettingSelection(R.id.cb_boat, R.string.setting_transportation_ship);
+        initSettingSelection(R.id.cb_firstclass, R.string.setting_classes_first);
+        initSettingSelection(R.id.cb_secondclass, R.string.setting_classes_second);
     }
 
-    private void initTransportationSelection(@IdRes int checkboxId , @StringRes int keyResId) {
+    private void initSettingSelection(@IdRes int checkboxId , @StringRes int keyResId) {
         CheckBox transportationCheckbox = (CheckBox) findViewById(checkboxId);
         final String key = getString(keyResId);
         transportationCheckbox.setChecked(Boolean.valueOf(getSettings(key, String.valueOf(Boolean.TRUE))));

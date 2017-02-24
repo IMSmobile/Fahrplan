@@ -52,8 +52,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/label_transportations"
+            android:id="@+id/layout_transportiation"
             android:orientation="horizontal">
             <CheckBox
                 android:text="@string/cb_train"
@@ -77,7 +78,33 @@
                 android:id="@+id/cb_boat" />
         </LinearLayout>
 
+        <TextView
+            android:text="@string/label_classes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout_transportiation"
+            android:id="@+id/label_classes"
+            android:labelFor="@+id/label_transportations"
+            android:layout_alignParentStart="true"
+            />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/label_classes"
+            android:id="@+id/layout_classes"
+            android:orientation="horizontal">
+            <CheckBox
+                android:text="@string/cb_firstclass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cb_firstclass" />
+            <CheckBox
+                android:text="@string/cb_secondclass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cb_secondclass" />
+        </LinearLayout>
 
     </RelativeLayout>
 </RelativeLayout>

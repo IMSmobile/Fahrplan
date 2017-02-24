@@ -26,6 +26,8 @@
     <string name="setting_transportation_tram" translatable="false">io.github.imsmobile.fahrplan.settings.transportation.tram</string>
     <string name="setting_transportation_bus" translatable="false">io.github.imsmobile.fahrplan.settings.transportation.bus</string>
     <string name="setting_transportation_ship" translatable="false">io.github.imsmobile.fahrplan.settings.transportation.ship</string>
+    <string name="setting_classes_first" translatable="false">io.github.imsmobile.fahrplan.settings.classes.first</string>
+    <string name="setting_classes_second" translatable="false">io.github.imsmobile.fahrplan.settings.classes.second</string>
     <string name="setting_key_take_me_home" translatable="false">setting_take_me_home</string>
     <string name="button_take_me_home">Take me home</string>
     <string name="error_missing_take_me_home">Take me home address not configured.</string>
@@ -37,4 +39,7 @@
     <string name="cb_tram">&#128651; Tram</string>
     <string name="cb_bus">&#128652; Bus</string>
     <string name="cb_boat">&#128674; Ship</string>
+    <string name="label_classes">Classes:</string>
+    <string name="cb_firstclass">First Class</string>
+    <string name="cb_secondclass">Second Class</string>
 </resources>
