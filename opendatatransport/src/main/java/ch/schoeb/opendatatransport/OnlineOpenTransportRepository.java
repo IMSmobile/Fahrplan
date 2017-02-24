@@ -46,15 +46,15 @@ public class OnlineOpenTransportRepository implements IOpenTransportRepository {
     }
 
     public ConnectionList searchConnections(String from, String to, String via, String date, String time, Boolean isArrivalTime) throws OpenDataTransportException {
-        String url = buildSearchConnectionUrl(from, to, via, date, time, Collections.<String>emptyList(), isArrivalTime);
+        String url = buildSearchConnectionUrl(from, to, via, date, time, Collections.<String>emptyList(), isArrivalTime, 0, 0);
         String json = GetJson(url);
 
         Gson gson = new Gson();
         return gson.fromJson(json, ConnectionList.class);
     }
 
-    public ConnectionList searchConnections(String from, String to, String via, String date, String time,List<String> transportations, Boolean isArrivalTime) throws OpenDataTransportException {
-        String url = buildSearchConnectionUrl(from, to, via, date, time,transportations, isArrivalTime);
+    public ConnectionList searchConnections(String from, String to, String via, String date, String time,List<String> transportations, Boolean isArrivalTime, int limit, int page) throws OpenDataTransportException {
+        String url = buildSearchConnectionUrl(from, to, via, date, time,transportations, isArrivalTime, limit, page);
         String json = GetJson(url);
 
         Gson gson = new Gson();
@@ -63,7 +63,7 @@ public class OnlineOpenTransportRepository implements IOpenTransportRepository {
 
     @Override
     public ConnectionList searchConnections(ConnectionQuery query) throws OpenDataTransportException {
-        return searchConnections(query.getFrom(), query.getTo(), null, query.getDate(), query.getTime(), getTransporations(query), query.isArrivalTime());
+        return searchConnections(query.getFrom(), query.getTo(), null, query.getDate(), query.getTime(), getTransporations(query), query.isArrivalTime(), query.getLimit(), query.getPage());
     }
 
     private List<String> getTransporations(ConnectionQuery query) {
@@ -110,7 +110,7 @@ public class OnlineOpenTransportRepository implements IOpenTransportRepository {
         }
     }
 
-    private String buildSearchConnectionUrl(String from, String to, String via, String date, String time, List<String> transportations,  Boolean isArrivalTime) {
+    private String buildSearchConnectionUrl(String from, String to, String via, String date, String time, List<String> transportations,  Boolean isArrivalTime, int limit, int page) {
         String url = null;
         try {
             url = "http://transport.opendata.ch/v1/connections?from=" + URLEncoder.encode(from, "UTF-8") + "&to=" + URLEncoder.encode(to, "UTF-8");
@@ -132,6 +132,14 @@ public class OnlineOpenTransportRepository implements IOpenTransportRepository {
             }
             if (!transportations.isEmpty()) {
                 url += "&" + Joiner.on("&").join(Lists.transform(transportations, transportationParamSuffix));
+            }
+
+            if (page > 0) {
+                url += "&page=" + page;
+            }
+
+            if (limit > 0) {
+                url += "&limit=" + limit;
             }
 
         } catch (UnsupportedEncodingException e) {

@@ -24,6 +24,7 @@ import ch.schoeb.opendatatransport.model.Connection;
 import ch.schoeb.opendatatransport.model.ConnectionQuery;
 import io.github.imsmobile.fahrplan.adapter.ConnectionAdapter;
 import io.github.imsmobile.fahrplan.model.FavoriteModel;
+import io.github.imsmobile.fahrplan.listener.SearchResultScrollListener;
 import io.github.imsmobile.fahrplan.task.ConnectionSearchTask;
 import io.github.imsmobile.fahrplan.ui.ProgressDialogUI;
 
@@ -35,6 +36,9 @@ public class SearchResultActivity extends AppCompatActivity {
     private String from;
     private String to;
     private FavoriteModel favorites;
+    private ConnectionQuery query;
+    private ConnectionAdapter adapter;
+    private List<Connection> connections;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,7 +53,7 @@ public class SearchResultActivity extends AppCompatActivity {
 
         from = intent.getStringExtra(MainActivity.FROM_MESSAGE);
         to = intent.getStringExtra(MainActivity.TO_MESSAGE);
-        ConnectionQuery query = new ConnectionQuery();
+        query = new ConnectionQuery();
         query.setFrom(from);
         query.setTo(to);
         query.setArrivalTime(Boolean.parseBoolean(intent.getStringExtra(MainActivity.IS_ARRIVAL_TIME_MESSAGE)));
@@ -61,7 +65,6 @@ public class SearchResultActivity extends AppCompatActivity {
         query.setBus(Boolean.parseBoolean(intent.getStringExtra(MainActivity.IS_BUS_MESSAGE)));
         query.setShip(Boolean.parseBoolean(intent.getStringExtra(MainActivity.IS_SHIP_MESSAGE)));
         startSearch(query);
-
     }
 
     private Date getDate(String date) {
@@ -113,11 +116,20 @@ public class SearchResultActivity extends AppCompatActivity {
         }
     }
 
-    public void setResult(List<Connection> connections) {
-        ListView listView = (ListView)findViewById(R.id.result_list);
-
-        ConnectionAdapter adapter = new ConnectionAdapter(this, connections);
-        listView.setAdapter(adapter);
+    public void setResult(List<Connection> result) {
+        if(connections == null) {
+            connections = result;
+        } else {
+            connections.addAll(result);
+        }
+        if(adapter == null) {
+            ListView listView = (ListView)findViewById(R.id.result_list);
+            adapter = new ConnectionAdapter(this, result);
+            listView.setAdapter(adapter);
+            listView.setOnScrollListener(new SearchResultScrollListener(this, query));
+        } else {
+            adapter.notifyDataSetChanged();
+        }
     }
 
     public void startProgressDialog() {
