@@ -58,23 +58,9 @@ public class ConnectionActivity extends AppCompatActivity {
                 text.append(String.format("%s %s %s\n", s.getDeparture().getStation().getName(), ARROW, s.getArrival().getStation().getName()));
 
                 text.append(String.format("%s - %s\n", DF.format(new Date(s.getDeparture().getDepartureTimestamp().longValue() * 1000)), DF.format(new Date(Long.parseLong(s.getArrival().getArrivalTimestamp()) * 1000))));
-
+                JourneyPrinter journeyPrinter = new JourneyPrinter();
                 Journey journey = s.getJourney();
-                String category =  journey.getCategory();
-                switch(category) {
-                    case "S":
-                        text.append(category).append(journey.getNumber());
-                        break;
-                    case "T":
-                        text.append(TRAM_ICON).append(journey.getNumber());
-                        break;
-                    case "BUS":
-                    case "NFB":
-                        text.append(BUS_ICON).append(journey.getNumber());
-                        break;
-                    default:
-                        text.append(journey.getName());
-                }
+                text.append(journeyPrinter.getJourneryText(getApplicationContext(), journey));
                 if(!s.getDeparture().getPlatform().isEmpty()) {
                     text.append(String.format(" %s %s ", getString(R.string.connection_on_track), s.getDeparture().getPlatform()));
                 }

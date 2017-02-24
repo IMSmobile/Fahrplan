@@ -24,6 +24,7 @@ import java.util.Locale;
 import ch.schoeb.opendatatransport.model.Connection;
 import ch.schoeb.opendatatransport.model.Journey;
 import ch.schoeb.opendatatransport.model.Section;
+import io.github.imsmobile.fahrplan.JourneyPrinter;
 import io.github.imsmobile.fahrplan.R;
 import io.github.imsmobile.fahrplan.SearchResultActivity;
 
@@ -112,24 +113,12 @@ public class ConnectionAdapter extends BaseAdapter {
 
     private List<String> getJourneys(Connection connection) {
         List<String> journeys = new ArrayList<>();
+        JourneyPrinter journeyPrinter = new JourneyPrinter();
         for (Section section: connection.getSections()) {
             Journey journey = section.getJourney();
-            if(journey != null) {
-                String category =  journey.getCategory();
-                switch(category) {
-                    case "S":
-                        journeys.add(category + journey.getNumber());
-                        break;
-                    case "T":
-                        journeys.add(context.getString(R.string.icon_tram) + journey.getNumber());
-                        break;
-                    case "BUS":
-                    case "NFB":
-                        journeys.add(context.getString(R.string.icon_bus) + journey.getNumber());
-                        break;
-                    default:
-                        journeys.add(category);
-                }
+            if (journey != null) {
+                String journeryText = journeyPrinter.getJourneryText(context, journey);
+                journeys.add(journeryText);
             }
         }
         return journeys;
