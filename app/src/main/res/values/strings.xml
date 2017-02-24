@@ -49,4 +49,6 @@
     <string name="label_classes">Show occupancy for:</string>
     <string name="cb_firstclass">First Class</string>
     <string name="cb_secondclass">Second Class</string>
+    <string name="icon_oppositeDirection" translatable="false">🔀</string>
+    <string name="icon_home" translatable="false">🏠</string>
 </resources>
