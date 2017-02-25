@@ -10,9 +10,10 @@
         android:id="@+id/toolbar_layout"
         layout="@layout/toolbar"/>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:id="@+id/content"
+        android:orientation="vertical"
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar_layout"
         android:paddingBottom="@dimen/activity_vertical_margin"
@@ -20,53 +21,82 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin">
 
-    <TextView
+        <TextView
         android:text="@string/label_from"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/label_from"
-        android:labelFor="@+id/input_from"
+        android:labelFor="@+id/input_from"/>
 
-        android:layout_alignParentStart="true"
-        />
+        <LinearLayout
+            android:id="@+id/row_from"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <AutoCompleteTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:text=""
-        android:textSize="18sp"
-        android:hint="@string/input_from"
-        android:id="@+id/input_from"
-        android:layout_below="@+id/label_from"
-        android:layout_alignStart="@+id/label_from" />
+            <AutoCompleteTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:text=""
+            android:textSize="18sp"
+            android:hint="@string/input_from"
+            android:id="@+id/input_from"
+                android:layout_weight="2" />
 
-    <TextView
+            <Button
+                android:id="@+id/oppositeButton"
+                android:contentDescription="@string/oppositeDirection"
+                android:text="@string/icon_oppositeDirection"
+                android:textSize="18sp"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+        <TextView
         android:text="@string/label_to"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/input_from"
-        android:layout_alignStart="@+id/input_from"
         android:labelFor="@+id/input_to"
-        android:id="@+id/label_to" />
+        android:id="@+id/label_to"/>
 
-    <AutoCompleteTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:text=""
-        android:textSize="18sp"
-        android:hint="@string/input_to"
-        android:layout_below="@+id/label_to"
-        android:layout_alignStart="@+id/label_to"
-        android:id="@+id/input_to" />
+        <LinearLayout
+            android:id="@+id/row_to"
+            android:orientation="horizontal"
+            android:layout_below="@+id/label_to"
+            android:layout_alignStart="@+id/label_to"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <TextView
+            <AutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:text=""
+                android:textSize="18sp"
+                android:hint="@string/input_to"
+                android:id="@+id/input_to"
+                android:layout_weight="2" />
+
+            <Button
+                android:id="@+id/btn_take_me_home"
+                android:contentDescription="@string/button_take_me_home"
+                android:text="@string/icon_home"
+                android:textSize="18sp"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <TextView
             android:text="@string/label_departure"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/input_to"
-            android:layout_alignStart="@+id/input_from"
+            android:layout_below="@+id/row_to"
+            android:layout_alignStart="@+id/row_to"
             android:labelFor="@+id/input_to"
             android:inputType="none"
             android:textSize="18sp"
@@ -76,27 +106,11 @@
             android:id="@+id/label_departure" />
 
         <Button
-            android:text="@string/oppositeDirection"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/oppositeButton"
-            android:layout_below="@+id/label_departure"
-            android:layout_alignParentStart="true" />
-
-        <Button
-            android:text="@string/button_take_me_home"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_take_me_home"
-            android:layout_below="@+id/oppositeButton"
-            android:layout_alignParentStart="true" />
-
-        <Button
             android:text="@string/search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/btn_search"
-            android:layout_below="@+id/btn_take_me_home"
+            android:layout_below="@+id/label_departure"
             android:layout_alignParentStart="true" />
 
         <ListView
@@ -105,6 +119,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/btn_search"/>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>
