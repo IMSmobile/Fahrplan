@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.setting = new Setting(this);
         setContentView(R.layout.activity_main);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         setDepartureTime(new Date());
@@ -67,8 +68,6 @@ public class MainActivity extends AppCompatActivity {
         ListView listView = (ListView)findViewById(R.id.list_favorites);
         FavoriteAdapter favoriteadapter = new FavoriteAdapter(this, favorite);
         listView.setAdapter(favoriteadapter);
-
-        this.setting = new Setting(this);
     }
 
     private void registerSearchButton() {
