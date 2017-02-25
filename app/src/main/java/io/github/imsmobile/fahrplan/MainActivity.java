@@ -123,17 +123,14 @@ public class MainActivity extends AppCompatActivity {
         EditText toText = (EditText) findViewById(R.id.input_to);
         String to = toText.getText().toString();
 
-        TextView departureTimeText = (TextView) findViewById(R.id.label_departure);
-        String departureTime = departureTimeText.getText().toString().substring(getDepartureTimePrefix().length());
-
         if(to.isEmpty() || from.isEmpty()) {
             Toast.makeText(this, this.getResources().getText(R.string.error_search_incomplete), Toast.LENGTH_LONG).show();
         } else {
-            startSearchActivity(to, from, departureTime);
+            startSearchActivity(to, from);
         }
 
     }
-    private void startSearchActivity(String to, String from, String departureTime) {
+    private void startSearchActivity(String to, String from) {
         Intent intent = new Intent(this, SearchResultActivity.class);
         intent.putExtra(FROM_MESSAGE, from);
         intent.putExtra(TO_MESSAGE, to);
