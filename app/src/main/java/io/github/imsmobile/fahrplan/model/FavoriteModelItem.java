@@ -1,7 +1,5 @@
 package io.github.imsmobile.fahrplan.model;
 
-import com.google.common.base.Objects;
-
 public class FavoriteModelItem {
     private final String from;
     private final String to;
@@ -31,15 +29,15 @@ public class FavoriteModelItem {
 
         FavoriteModelItem that = (FavoriteModelItem) o;
 
-        if (from != null ? !from.equals(that.from) : that.from != null) return false;
-        return to != null ? to.equals(that.to) : that.to == null;
+        if (from != null ? !from.equalsIgnoreCase(that.from) : that.from != null) return false;
+        return to != null ? to.equalsIgnoreCase(that.to) : that.to == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = from != null ? from.hashCode() : 0;
-        result = 31 * result + (to != null ? to.hashCode() : 0);
+        int result = from != null ? from.toLowerCase().hashCode() : 0;
+        result = 31 * result + (to != null ? to.toLowerCase().hashCode() : 0);
         return result;
     }
 }
