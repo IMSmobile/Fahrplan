@@ -84,7 +84,7 @@
             android:text="@string/transport_app_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/TitleofApp"
+            android:id="@+id/TitleOfApp"
             android:textSize="24sp"
             android:layout_above="@+id/label_version"
             android:layout_toEndOf="@+id/imageView" />

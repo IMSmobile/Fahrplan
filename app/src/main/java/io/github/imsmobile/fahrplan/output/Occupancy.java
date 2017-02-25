@@ -6,10 +6,6 @@ import ch.schoeb.opendatatransport.model.Connection;
 import io.github.imsmobile.fahrplan.R;
 import io.github.imsmobile.fahrplan.setting.Setting;
 
-/**
- * Created by sandro on 25.02.2017.
- */
-
 public class Occupancy {
 
     private final Context context;

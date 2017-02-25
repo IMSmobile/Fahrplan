@@ -41,7 +41,7 @@
     <string name="cb_boat">&#128674; Ship</string>
     <string name="sourcefiles_text">Sourcefiles available under:\nhttps://github.com/IMSmobile/Fahrplan</string>
     <string name="transport_app_name" translatable="false">Transport APP</string>
-    <string name="appiconimage">appIconImage</string>
+    <string name="appiconimage" translatable="false">appIconImage</string>
     <string name="label_connection">Connection</string>
     <string name="label_share">Share</string>
     <string name="connection_on_track">on track</string>
@@ -55,6 +55,6 @@
     <string name="icon_boat"  translatable="false">&#128674;</string>
     <string name="icon_rightward_arrow" translatable="false">&#10140;</string>
     <string name="icon_occupancy" translatable="false">&#9601;</string>
-    <string name="icon_oppositeDirection" translatable="false">🔀</string>
-    <string name="icon_home" translatable="false">🏠</string>
+    <string name="icon_oppositeDirection" translatable="false">&#128256;</string>
+    <string name="icon_home" translatable="false">&#127968;</string>
 </resources>

@@ -5,9 +5,6 @@ import android.support.v4.app.FragmentActivity;
 
 import io.github.imsmobile.fahrplan.R;
 
-/**
- * Created by sandro on 09.02.2017.
- */
 public class ProgressDialogUI extends ProgressDialog {
 
     public ProgressDialogUI(FragmentActivity activity) {

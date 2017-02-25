@@ -201,7 +201,7 @@ public class MainActivity extends AppCompatActivity {
     private void setDepartureTime(Date date) {
         SimpleDateFormat df = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
         TextView editText = (TextView) findViewById(R.id.label_departure);
-        editText.setText(getDepartureTimePrefix()+ df .format(date));
+        editText.setText(getDepartureTimePrefix()+ df.format(date));
     }
 
     @NonNull
