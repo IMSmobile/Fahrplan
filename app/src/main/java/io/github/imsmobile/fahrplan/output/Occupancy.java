@@ -23,17 +23,17 @@ public class Occupancy {
         StringBuilder occupancy = new StringBuilder();
         if((connection.getCapacity1st() != null) && setting.getBooleanSettings(R.string.setting_classes_first, true)) {
             occupancy.append(" 1.");
-            occupancy.append((char) (getLowOccupanyIcon() + connection.getCapacity1st().intValue()*2));
+            occupancy.append((char) (getLowOccupancyIcon() + connection.getCapacity1st().intValue()*2));
         }
         if((connection.getCapacity2nd() != null) && setting.getBooleanSettings(R.string.setting_classes_second, true)) {
             occupancy.append(" 2.");
-            occupancy.append((char) (getLowOccupanyIcon() + connection.getCapacity2nd().intValue()*2));
+            occupancy.append((char) (getLowOccupancyIcon() + connection.getCapacity2nd().intValue()*2));
         }
         return occupancy.toString();
     }
 
 
-    private char getLowOccupanyIcon() {
+    private char getLowOccupancyIcon() {
         return context.getString(R.string.icon_occupancy).charAt(0);
     }
 }

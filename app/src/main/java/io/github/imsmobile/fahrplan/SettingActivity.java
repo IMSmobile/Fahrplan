@@ -1,6 +1,5 @@
 package io.github.imsmobile.fahrplan;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.StringRes;

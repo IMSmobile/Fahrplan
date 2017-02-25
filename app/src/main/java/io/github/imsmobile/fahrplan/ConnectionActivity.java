@@ -25,8 +25,6 @@ import io.github.imsmobile.fahrplan.output.JourneyPrinter;
 public class ConnectionActivity extends AppCompatActivity {
 
     private static final DateFormat DF = DateFormat.getTimeInstance(DateFormat.SHORT);
-    private static final String TRAM_ICON = "\uD83D\uDE8B";
-    private static final String BUS_ICON = "\uD83D\uDE8C";
     private static final String ARROW = "\u279C";
 
     private Connection connection;
@@ -61,7 +59,7 @@ public class ConnectionActivity extends AppCompatActivity {
                 text.append(String.format("%s - %s\n", DF.format(new Date(s.getDeparture().getDepartureTimestamp().longValue() * 1000)), DF.format(new Date(Long.parseLong(s.getArrival().getArrivalTimestamp()) * 1000))));
                 JourneyPrinter journeyPrinter = new JourneyPrinter();
                 Journey journey = s.getJourney();
-                text.append(journeyPrinter.getJourneryText(getApplicationContext(), journey));
+                text.append(journeyPrinter.getJourneyText(getApplicationContext(), journey));
                 if(!s.getDeparture().getPlatform().isEmpty()) {
                     text.append(String.format(" %s %s ", getString(R.string.connection_on_track), s.getDeparture().getPlatform()));
                 }

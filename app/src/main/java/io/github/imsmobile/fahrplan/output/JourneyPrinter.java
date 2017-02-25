@@ -5,13 +5,9 @@ import android.content.Context;
 import ch.schoeb.opendatatransport.model.Journey;
 import io.github.imsmobile.fahrplan.R;
 
-/**
- * Created by sandro on 24.02.2017.
- */
-
 public class JourneyPrinter {
 
-    public String getJourneryText(Context context, Journey journey) {
+    public String getJourneyText(Context context, Journey journey) {
             String category =  journey.getCategory();
             switch(category) {
                 case "S":

@@ -104,7 +104,7 @@ public class ConnectionAdapter extends BaseAdapter {
         for (Section section: connection.getSections()) {
             Journey journey = section.getJourney();
             if (journey != null) {
-                String journeyText = journeyPrinter.getJourneryText(context, journey);
+                String journeyText = journeyPrinter.getJourneyText(context, journey);
                 journeys.add(journeyText);
             }
         }
