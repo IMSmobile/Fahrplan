@@ -1,8 +1,9 @@
-package io.github.imsmobile.fahrplan;
+package io.github.imsmobile.fahrplan.output;
 
 import android.content.Context;
 
 import ch.schoeb.opendatatransport.model.Journey;
+import io.github.imsmobile.fahrplan.R;
 
 /**
  * Created by sandro on 24.02.2017.

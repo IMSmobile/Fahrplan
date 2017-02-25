@@ -20,6 +20,7 @@ import java.util.Date;
 import ch.schoeb.opendatatransport.model.Connection;
 import ch.schoeb.opendatatransport.model.Journey;
 import ch.schoeb.opendatatransport.model.Section;
+import io.github.imsmobile.fahrplan.output.JourneyPrinter;
 
 public class ConnectionActivity extends AppCompatActivity {
 
