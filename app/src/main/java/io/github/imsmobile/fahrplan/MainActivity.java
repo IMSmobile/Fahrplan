@@ -79,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void registerOppositeButton() {
         Button buttonOne = (Button) findViewById(R.id.oppositeButton);
+        buttonOne.setText("\uD83D\uDD00");
+
         buttonOne.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startChangeDirection();
@@ -88,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void registerTakeMeHomeButton() {
         Button buttonOne = (Button) findViewById(R.id.btn_take_me_home);
+        buttonOne.setText("\uD83C\uDFE0");
+
         buttonOne.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 fillToWithTakeMeHome();
