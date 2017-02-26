@@ -46,8 +46,8 @@
 
             <Button
                 android:id="@+id/oppositeButton"
+                android:background="@android:color/transparent"
                 android:contentDescription="@string/oppositeDirection"
-                android:text="@string/icon_oppositeDirection"
                 android:textSize="18sp"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
@@ -82,8 +82,9 @@
 
             <Button
                 android:id="@+id/btn_take_me_home"
+                android:background="@android:color/transparent"
                 android:contentDescription="@string/button_take_me_home"
-                android:text="@string/icon_home"
+                android:text=""
                 android:textSize="18sp"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"

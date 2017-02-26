@@ -1,4 +1,4 @@
-<resources>
+﻿<resources>
     <string name="app_name">Schedule</string>
     <string name="search">Search</string>
     <string name="label_from">From:</string>
@@ -55,6 +55,4 @@
     <string name="icon_boat"  translatable="false">&#128674;</string>
     <string name="icon_rightward_arrow" translatable="false">&#10140;</string>
     <string name="icon_occupancy" translatable="false">&#9601;</string>
-    <string name="icon_oppositeDirection" translatable="false">&#128256;</string>
-    <string name="icon_home" translatable="false">&#127968;</string>
 </resources>
