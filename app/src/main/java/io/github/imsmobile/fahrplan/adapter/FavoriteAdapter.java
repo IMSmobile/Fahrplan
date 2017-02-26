@@ -66,6 +66,7 @@ public class FavoriteAdapter extends BaseAdapter {
             {
                 MainActivity c = (MainActivity) context;
                 c.removeFavorite(position);
+                notifyDataSetChanged();
             }
         });
 
